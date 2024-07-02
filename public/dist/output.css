@@ -666,11 +666,6 @@ video {
   padding: 1.5rem;
 }
 
-.py-5 {
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
-}
-
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -719,7 +714,7 @@ video {
 @font-face {
   font-family: 'Britanica-HeavySemiExpanded';
 
-  src: url(../../public/fonts/britanica-heavy-semi-expanded/britanica-heavy-semi-expanded.ttf) format('truetype');
+  src: url(../fonts/britanica-heavy-semi-expanded/britanica-heavy-semi-expanded.ttf) format('truetype');
 
   font-weight: normal;
 
