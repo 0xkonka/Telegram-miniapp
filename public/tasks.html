@@ -4,61 +4,74 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Telegram Mini App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="dist/output.css" rel="stylesheet">
 </head>
 <body class="bg-red-100 flex items-center justify-center min-h-screen">
-    <div id="app" class="bg-[#070909] p-4 w-full min-h-screen h-full max-w-[590px] mx-auto md:max-w-xl lg:max-w-2xl">
+    <div id="app" class="bg-[#070909] p-4 w-full min-h-screen h-full">
         <!-- Content Here -->
-        <div class="mt-2">
+        <div class="mt-10">
             <div class="flex flex-col">
-                <p class="text-4xl text-white font-britanica text-center mt-4">
+                <p class="text-3xl text-center text-white font-britanica mb-8">
                     3 tasks available
                 </p>
-                <p class="text-center text-white mt-4">
+                <p class="text-lg text-center text-white font-light leading-tight mb-24">
                     We’ll reward you immediately with points after each task completion.
                 </p>
-                <div class="mt-4">
-                    <div class="task-bg flex justify-between items-center border border-[#393939] rounded-md p-4 mt-8 mb-4">
-                        <div>
-                            <p class="font-semibold text-white">Subscribe to Tren Telegram</p>
-                            <p class="font-britanica text-white text-2xl">+200 BP</p>
-                        </div>
-                        <div>
-                            <Button class="rounded bg-primary text-white font-semibold px-6 py-1.5">Start</Button>
-                        </div>
-                    </div>
-                    <div class="task-bg flex justify-between items-center border border-[#393939] rounded-md p-4 mb-4">
-                        <div>
-                            <p class="font-semibold text-white">Join Tren’s Discord</p>
-                            <p class="font-britanica text-white text-2xl">+200 BP</p>
-                        </div>
-                        <div>
-                            <Button class="rounded bg-primary text-white font-semibold px-6 py-1.5">Start</Button>
-                        </div>
-                    </div>
-                    <div class="task-bg flex justify-between items-center border border-[#393939] rounded-md p-4">
-                        <div>
-                            <p class="font-semibold text-white">Join Tren’s X</p>
-                            <p class="font-britanica text-white text-2xl">+200 BP</p>
-                        </div>
-                        <div>
-                            <Button class="rounded bg-primary text-white font-semibold px-6 py-1.5">Start</Button>
-                        </div>
-                    </div>
+            </div>
+        </div>
+        
+        <div class="flex flex-col gap-4">
+            <div class="w-full bg-[#0C0E0F] border border-[#393939] rounded-md px-5 py-6 flex items-center gap-4">
+                <img src="./assets/svgs/telegram.svg" alt="Telegram" class="w-12 h-12"/>
+                <div class="flex flex-col gap-2">
+                    <p class="text-xl text-white font-semibold">Subscribe to Tren Telegram</p>
+                    <p class="text-[17px] text-white font-light">+200 BP</p>
                 </div>
-                
+                <div>
+                    <button class="bg-[#181818] px-4 py-2 rounded-full text-xl text-white font-semibold ml-auto">Start</button>
+                </div>
             </div>
-            <div class="absolute w-full left-0 bottom-0 bg-black py-4 flex justify-evenly">
-                <a href="./index.html">
-                    <img src="./assets/svgs/home.svg" alt="Home" class="w-6 h-6"/>
-                </a>
-                <a href="./tasks.html">
-                    <img src="./assets/svgs/task-white.svg" alt="Task" class="w-6 h-6"/>
-                </a>
-                <img src="./assets/svgs/main.svg" alt="Main" class="w-6 h-6"/>
-                <img src="./assets/svgs/people.svg" alt="People" class="w-6 h-6"/>
-                <img src="./assets/svgs/profile.svg" alt="Profile" class="w-5 h-5"/>
+            <div class="w-full bg-[#0C0E0F] border border-[#393939] rounded-md px-5 py-6 flex items-center gap-4">
+                <img src="./assets/svgs/discord.svg" alt="Discord" class="w-12 h-12"/>
+                <div class="flex flex-col gap-2">
+                    <p class="text-xl text-white font-semibold">Join Tren's Discord</p>
+                    <p class="text-[17px] text-white font-light">+200 BP</p>
+                </div>
+                <div>
+                    <button class="bg-[#181818] px-4 py-2 rounded-full text-xl text-white font-semibold ml-auto">Start</button>
+                </div>
             </div>
+            <div class="w-full bg-[#0C0E0F] border border-[#393939] rounded-md px-5 py-6 flex items-center gap-4">
+                <img src="./assets/svgs/twitter.svg" alt="Twitter" class="w-12 h-12"/>
+                <div class="flex flex-col gap-2">
+                    <p class="text-xl text-white font-semibold">Follow @TrenFinance on X</p>
+                    <p class="text-[17px] text-white font-light">+200 BP</p>
+                </div>
+                <div>
+                    <button class="bg-[#181818] px-4 py-2 rounded-full text-xl text-white font-semibold ml-auto">Start</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="absolute w-full left-0 bottom-0 bg-black py-4 flex justify-around">
+            <a class="flex flex-col items-center" href="./index.html">
+                <img src="./assets/svgs/home.svg" alt="Farm" class="w-7 h-7"/>
+                <p class="text-[#515151] text-lg">Farm</p>
+            </a>
+            <a class="flex flex-col items-center" href="./tasks.html">
+                <img src="./assets/svgs/tasks-white.svg" alt="Task" class="w-7 h-7"/>
+                <p class="text-white text-lg">Tasks</p>
+            </a>
+            <a class="flex flex-col items-center" href="./refer.html">
+                <img src="./assets/svgs/refer.svg" alt="Refer" class="w-7 h-7"/>
+                <p class="text-[#515151] text-lg">Refer</p>
+            </a>
+            <a class="flex flex-col items-center">
+                <img src="./assets/svgs/profile.svg" alt="Refer" class="w-7 h-7"/>
+                <p class="text-[#515151] text-lg">Profile</p>
+            </a>
         </div>
     </div>
   <script src="../src/scripts/main.js"></script>

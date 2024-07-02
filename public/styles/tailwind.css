@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 /* ==== Custom Fonts ==== */
+body {
+    font-family: 'Work Sans', sans-serif;
+}
+
 @font-face {
     font-family: 'Britanica-HeavySemiExpanded';
     src: url(../fonts/britanica-heavy-semi-expanded/britanica-heavy-semi-expanded.ttf) format('truetype');
