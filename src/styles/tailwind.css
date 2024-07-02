@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==== Custom Fonts ==== */
+@font-face {
+    font-family: 'Britanica-HeavySemiExpanded';
+    src: url(../../public/fonts/britanica-heavy-semi-expanded/britanica-heavy-semi-expanded.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.font-britanica {
+    font-family: 'Britanica-HeavySemiExpanded', sans-serif;
+}
