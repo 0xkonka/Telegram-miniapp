@@ -13,3 +13,9 @@
 .font-britanica {
     font-family: 'Britanica-HeavySemiExpanded', sans-serif;
 }
+
+.task-bg {
+    background-image: url('../assets/images/task-bg.png');
+    background-position: right center;
+    background-size: cover;
+}
