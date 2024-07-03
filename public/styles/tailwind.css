@@ -18,8 +18,6 @@ body {
     font-family: 'Britanica-HeavySemiExpanded', sans-serif;
 }
 
-.task-bg {
-    background-image: url('../assets/images/task-bg.png');
-    background-position: right center;
-    background-size: cover;
+.app-bg {
+    background: linear-gradient(180deg, #101010 7.54%, #000 43.4%);
 }
