@@ -9,51 +9,107 @@
 </head>
 <body class="app-bg flex items-center justify-center min-h-screen">
     <div id="app" class="px-4 pt-12 pb-32  w-full min-h-screen h-full">
-        <!-- <h1 class="text-xl font-medium text-white text-center">Tren Finance</h1>
-        <p class="text-lg text-[#999] text-center">bot</p> -->
-
         <!-- Content Here -->
-        <div class="mt-2">
-            <div class="flex flex-col">
-                <p class="text-lg text-white text-center mb-4">In Storage :</p>
-                <div class="flex gap-4 justify-center items-center">
-                    <img src="./assets/svgs/jewelry.svg" alt="Point" class="w-8 h-8"/>
-                    <p class="text-4xl text-white font-britanica">
-                        0.032084
+        <div id="content">
+            <div id="title">
+                <div class="flex flex-col">
+                    <p class="text-3xl text-center text-white font-britanica mb-8">
+                        Referrals
+                    </p>
+                    <p class="max-w-xs text-center text-white font-light leading-tight mb-12 mx-auto">
+                        When you refer a friend you both receive 2,000 points as a bonus.
                     </p>
                 </div>
-                <div class="flex justify-center items-center mt-4">
-                    <p class="text-lg text-white mb-1 mr-4">Tren Balance :</p>
-                    <img src="./assets/svgs/jewelry.svg" alt="Point" class="w-5 h-5 mr-2"/>
-                    <p class="text-xl text-white font-britanica">
-                        0.030000
-                    </p>
-                </div>
-                <img src="./assets/images/scene.png" alt="Tren Finance" class="w-[250px] h-auto mx-auto"/>
-                <Button class="w-full py-2 border border-primary text-white rounded-md text-white text-lg hover:bg-primary hover:text-white">
-                    Farming
-                </Button>
             </div>
-        </div>
+            <div class="flex gap-2 items-center pb-2 border-b border-[#393939]">
+                <img src="./assets/svgs/refer-green.svg" alt="Refer" class="w-5 h-5"/>
+                <p class="text-lg text-white font-semibold">Your Referrals</p>
+                <p class="font-britanica text-primary text-2xl ml-auto">1324</p>
+            </div>
+            <div id="referrals-list" class="flex flex-col gap-3 mt-4">
+                <p class="font-britanica text-white text-xl">Referrals</p>
+                <div class="w-full border border-[#393939] rounded-md p-3 flex justify-between items-center gap-3">
+                    <div class="flex flex-col gap-1">
+                        <p class="text-white font-semibold leading-tight">Joe Smith</p>
+                        <p class="text-sm text-primary font-light">5 days ago</p>
+                    </div>
+                    <div class="flex gap-2 items-center">
+                        <p class="font-britanica text-white text-2xl">235</p>
+                        <p class="text-[#999]">Points</p>
+                    </div>
+                </div>
+                <div class="w-full border border-[#393939] rounded-md p-3 flex justify-between items-center gap-3">
+                    <div class="flex flex-col gap-1">
+                        <p class="text-white font-semibold leading-tight">Tony Johnson</p>
+                        <p class="text-sm text-primary font-light">5 days ago</p>
+                    </div>
+                    <div class="flex gap-2 items-center">
+                        <p class="font-britanica text-white text-2xl">500</p>
+                        <p class="text-[#999]">Points</p>
+                    </div>
+                </div>
+                <div class="w-full border border-[#393939] rounded-md p-3 flex justify-between items-center gap-3">
+                    <div class="flex flex-col gap-1">
+                        <p class="text-white font-semibold leading-tight">Angela Williams</p>
+                        <p class="text-sm text-primary font-light">5 days ago</p>
+                    </div>
+                    <div class="flex gap-2 items-center">
+                        <p class="font-britanica text-white text-2xl">80</p>
+                        <p class="text-[#999]">Points</p>
+                    </div>
+                </div>
+                <div class="w-full border border-[#393939] rounded-md p-3 flex justify-between items-center gap-3">
+                    <div class="flex flex-col gap-1">
+                        <p class="text-white font-semibold leading-tight">David Stuart</p>
+                        <p class="text-sm text-primary font-light">5 days ago</p>
+                    </div>
+                    <div class="flex gap-2 items-center">
+                        <p class="font-britanica text-white text-2xl">170</p>
+                        <p class="text-[#999]">Points</p>
+                    </div>
+                </div>
+                <div class="w-full border border-[#393939] rounded-md p-3 flex justify-between items-center gap-3">
+                    <div class="flex flex-col gap-1">
+                        <p class="text-white font-semibold leading-tight">Sandra Black</p>
+                        <p class="text-sm text-primary font-light">5 days ago</p>
+                    </div>
+                    <div class="flex gap-2 items-center">
+                        <p class="font-britanica text-white text-2xl">67</p>
+                        <p class="text-[#999]">Points</p>
+                    </div>
+                </div>
+            </div>
+            <div id="invite-friend" class="grid grid-cols-12 gap-4 mt-6 justify-between">
+                <button class="col-span-5 flex gap-2 items-center bg-primary py-2 justify-center rounded">
+                    <img src="./assets/svgs/clipboard.svg" alt="Copy Link" class="w-6"/>
+                    <p class="text-lg font-semibold">Copy Link</p>
+                </button>
+                <button class="col-span-7 flex gap-2 items-center bg-primary py-2 justify-center rounded">
+                    <img src="./assets/svgs/revert.svg" alt="Refer a Friend" class="w-6"/>
+                    <p class="text-lg font-semibold">Refer a Friend</p>
+                </button>
+            </div>
 
+            
+        </div>
         <!-- Footer -->
-        <div class="fixed w-full left-0 bottom-0 py-4 flex justify-around">
+        <div class="fixed w-full left-0 bottom-0 py-4 flex justify-around bg-[#080A0A]">
             <a class="flex flex-col items-center" href="./index.html">
                 <img src="./assets/svgs/home.svg" alt="Farm" class="w-7 h-7"/>
-                <p class="text-white text-lg">Farm</p>
+                <p class="text-white">Farm</p>
             </a>
             <a class="flex flex-col items-center" href="./tasks.html">
                 <img src="./assets/svgs/tasks.svg" alt="Task" class="w-7 h-7"/>
-                <p class="text-white text-lg">Tasks</p>
+                <p class="text-white">Tasks</p>
             </a>
             <a class="flex flex-col items-center" href="./refer.html">
                 <img src="./assets/svgs/refer-green.svg" alt="Refer" class="w-7 h-7"/>
-                <p class="text-primary text-lg">Refer</p>
+                <p class="text-primary">Refer</p>
             </a>
             <a class="flex flex-col items-center relative">
                 <p class="absolute top-1.5 left-1/2 -translate-x-1/2 text-xs font-semibold text-black bg-primary rounded-[2px] px-1">Soon</p>
                 <img src="./assets/svgs/profile.svg" alt="Profile" class="w-7 h-7"/>
-                <p class="text-[#4D4D4D] text-lg">Profile</p>
+                <p class="text-[#4D4D4D]">Profile</p>
             </a>
         </div>
     </div>
