@@ -5,7 +5,10 @@ module.exports = {
     extend: {
       colors: {
         'primary': '#67DAB1'
-      }
+      },
+      blur: {
+        '15px': '15px',
+      },
     },
   },
   plugins: [],

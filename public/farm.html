@@ -29,8 +29,18 @@
                     4h : 36m : 24S
                 </p>
             </div>
-            <div class="h-32">
-
+            <div class="relative">
+                <div class="absolute w-screen left-[-16px] top-0 h-[50px] blur-15px bg-[#030303] rounded-[200px]"></div>
+            </div>
+            <div class="h-[250px] mx-[-16px] my-10 relative overflow-y-hidden">
+                <video class="absolute z-[-1] w-full top-[-250px]">
+                    <source src="./assets/videos/home-video.mp4" type="video/mp4">
+                    <source src="./assets/videos/home-video.mp4" type="video/ogg">
+                    Your platform does not support the video tag.
+                  </video>
+            </div>
+            <div class="relative">
+                <div class="absolute w-screen left-[-16px] top-[-60px] h-[50px] blur-15px bg-[#030303] rounded-[200px]"></div>
             </div>
             <div id="social-tasks" class="flex flex-col gap-2">
                 <div class="w-full border border-[#393939] rounded-md p-3 flex items-center gap-3">
@@ -54,7 +64,7 @@
         </div>
         <!-- Footer -->
         <div class="fixed w-full left-0 bottom-0 py-4 flex justify-around bg-[#080A0A]">
-            <a class="flex flex-col items-center" href="./index.html">
+            <a class="flex flex-col items-center" href="./farm.html">
                 <img src="./assets/svgs/home-green.svg" alt="Farm" class="w-7 h-7"/>
                 <p class="text-primary">Farm</p>
             </a>
