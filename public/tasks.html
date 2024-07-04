@@ -29,7 +29,7 @@
                         <p class="text-sm text-white font-light">+100 POINTS</p>
                     </div>
                     <div class="ml-auto">
-                        <button class="bg-[#181818] px-4 py-1 rounded-full text-white font-semibold">Start</button>
+                        <button id="start-telegram" class="bg-[#181818] px-4 py-1 rounded-full text-white font-semibold">Start</button>
                     </div>
                 </div>
                 <div class="w-full border border-[#393939] rounded-md p-3 flex items-center gap-3">
@@ -39,7 +39,7 @@
                         <p class="text-sm text-white font-light">+100 POINTS</p>
                     </div>
                     <div class="ml-auto">
-                        <button class="bg-[#181818] px-4 py-1 rounded-full text-white font-semibold">Start</button>
+                        <button id="start-discord" class="bg-[#181818] px-4 py-1 rounded-full text-white font-semibold">Start</button>
                     </div>
                 </div>
                 <div class="w-full border border-[#393939] rounded-md p-3 flex items-center gap-3">
@@ -49,7 +49,7 @@
                         <p class="text-sm text-white font-light">+100 POINTS</p>
                     </div>
                     <div class="ml-auto">
-                        <button class="bg-[#181818] px-4 py-1 rounded-full text-white font-semibold">Start</button>
+                        <button id="start-twitter" class="bg-[#181818] px-4 py-1 rounded-full text-white font-semibold">Start</button>
                     </div>
                 </div>
             </div>
@@ -74,11 +74,10 @@
     
                 <div class="flex justify-between mt-3">
                     <p class="text-lg text-white font-semibold">Task progression</p>
-                    <p class="text-lg text-white">1/3</p>
+                    <p id="task-count" class="text-lg text-white">0/3</p>
                 </div>
             </div>
 
-            
         </div>
         <!-- Footer -->
         <div class="fixed w-full left-0 bottom-0 py-4 flex justify-around bg-[#080A0A]">
@@ -101,6 +100,7 @@
             </a>
         </div>
     </div>
-  <script src="../src/scripts/main.js"></script>
+  <script src="../src/scripts/config.js"></script>
+  <script src="../src/scripts/task.js"></script>
 </body>
 </html>

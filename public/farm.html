@@ -16,8 +16,8 @@
                     <p class="text-xl text-center text-white mb-2">
                         Tren Points
                     </p>
-                    <p class="text-primary text-center text-4xl font-britanica">
-                        0.032084
+                    <p id="farming-points" class="text-primary text-center text-4xl font-britanica">
+                        0.000000
                     </p>
                 </div>
             </div>
@@ -25,8 +25,8 @@
                 <p class="text-xl text-center text-white">
                     Next claim in:
                 </p>
-                <p class="text-white text-center text-3xl font-britanica">
-                    4h : 36m : 24S
+                <p id="remaining-time" class="text-white text-center text-3xl font-britanica">
+                    --h : --m : --s
                 </p>
             </div>
             <div class="relative">
@@ -46,17 +46,17 @@
                 <div class="w-full border border-[#393939] rounded-md p-3 flex items-center gap-3">
                     <img src="./assets/svgs/refer-green.svg" alt="Referrals" class="w-6 h-6"/>
                     <p class="text-white font-semibold leading-tight">Successful Referrals</p>
-                    <p class="text-2xl text-primary font-britanica ml-auto">10</p>
+                    <p id="referrers-count" class="text-2xl text-primary font-britanica ml-auto">0</p>
                 </div>
                 <div class="w-full border border-[#393939] rounded-md p-3 flex items-center gap-3">
                     <img src="./assets/svgs/triangle.svg" alt="Points" class="w-6 h-6"/>
                     <p class="text-white font-semibold leading-tight">Referral Points</p>
-                    <p class="text-2xl text-primary font-britanica ml-auto">324</p>
+                    <p id="referral-points" class="text-2xl text-primary font-britanica ml-auto">0</p>
                 </div>
             </div>
             
             <div id="farming-button" class="mt-6">
-                <button class="w-full flex gap-2 items-center bg-primary py-2 justify-center rounded-md">
+                <button id="start-farming" class="w-full flex gap-2 items-center bg-primary py-2 justify-center rounded-md">
                     <img src="./assets/svgs/mining.svg" alt="Farming" class="w-6"/>
                     <p class="text-lg font-semibold">Start Farming</p>
                 </button>
@@ -83,6 +83,7 @@
             </a>
         </div>
     </div>
-  <script src="../src/scripts/main.js"></script>
+  <script src="../src/scripts/config.js"></script>
+  <script src="../src/scripts/farm.js"></script>
 </body>
 </html>
