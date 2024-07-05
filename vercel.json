@@ -6,13 +6,17 @@
     },
     {
       "src": "src/scripts/*.js",
-      "use": "@vercel/node"
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
       "dest": "public/$1"
+    },
+    {
+      "src": "/src/scripts/(.*)",
+      "dest": "src/scripts/$1"
     }
   ]
 }
