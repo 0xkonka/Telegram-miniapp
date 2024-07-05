@@ -42,12 +42,13 @@ document.addEventListener("DOMContentLoaded", () => {
   if(!usernameParam) {  // If username doesn't exist (Didn't pass from URL param), we create new user based on input name.
     launchButton.addEventListener("click", async (event) => {
       event.preventDefault(); // Prevent the default link behavior
-      const userId = usernameInput.value;
-      registerUser(userId)
+      const userName = usernameInput.value;
+      const userId = Math.round(Math.random() * 1000000);
+      registerUser(userId, userName)
     });
   } else {  // If the username already exist, we pass Signup page.
     usernameInput.value = usernameParam
-    registerUser(usernameParam)
+    registerUser(idParam, usernameParam)
   }
   
   // const app = document.getElementById('app');
