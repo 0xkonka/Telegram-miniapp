@@ -24,70 +24,21 @@
             <div class="flex gap-2 items-center pb-2 border-b border-[#393939]">
                 <img src="./assets/svgs/refer-green.svg" alt="Refer" class="w-5 h-5"/>
                 <p class="text-lg text-white font-semibold">Your Referrals</p>
-                <p class="font-britanica text-primary text-2xl ml-auto">1324</p>
+                <p id="referral-points" class="font-britanica text-primary text-2xl ml-auto">0</p>
             </div>
             <div id="referrals-list" class="flex flex-col gap-3 mt-4">
                 <p class="font-britanica text-white text-xl">Referrals</p>
-                <div class="w-full border border-[#393939] rounded-md p-3 flex justify-between items-center gap-3">
-                    <div class="flex flex-col gap-1">
-                        <p class="text-white font-semibold leading-tight">Joe Smith</p>
-                        <p class="text-sm text-primary font-light">5 days ago</p>
-                    </div>
-                    <div class="flex gap-2 items-center">
-                        <p class="font-britanica text-white text-2xl">235</p>
-                        <p class="text-[#999]">Points</p>
-                    </div>
-                </div>
-                <div class="w-full border border-[#393939] rounded-md p-3 flex justify-between items-center gap-3">
-                    <div class="flex flex-col gap-1">
-                        <p class="text-white font-semibold leading-tight">Tony Johnson</p>
-                        <p class="text-sm text-primary font-light">5 days ago</p>
-                    </div>
-                    <div class="flex gap-2 items-center">
-                        <p class="font-britanica text-white text-2xl">500</p>
-                        <p class="text-[#999]">Points</p>
-                    </div>
-                </div>
-                <div class="w-full border border-[#393939] rounded-md p-3 flex justify-between items-center gap-3">
-                    <div class="flex flex-col gap-1">
-                        <p class="text-white font-semibold leading-tight">Angela Williams</p>
-                        <p class="text-sm text-primary font-light">5 days ago</p>
-                    </div>
-                    <div class="flex gap-2 items-center">
-                        <p class="font-britanica text-white text-2xl">80</p>
-                        <p class="text-[#999]">Points</p>
-                    </div>
-                </div>
-                <div class="w-full border border-[#393939] rounded-md p-3 flex justify-between items-center gap-3">
-                    <div class="flex flex-col gap-1">
-                        <p class="text-white font-semibold leading-tight">David Stuart</p>
-                        <p class="text-sm text-primary font-light">5 days ago</p>
-                    </div>
-                    <div class="flex gap-2 items-center">
-                        <p class="font-britanica text-white text-2xl">170</p>
-                        <p class="text-[#999]">Points</p>
-                    </div>
-                </div>
-                <div class="w-full border border-[#393939] rounded-md p-3 flex justify-between items-center gap-3">
-                    <div class="flex flex-col gap-1">
-                        <p class="text-white font-semibold leading-tight">Sandra Black</p>
-                        <p class="text-sm text-primary font-light">5 days ago</p>
-                    </div>
-                    <div class="flex gap-2 items-center">
-                        <p class="font-britanica text-white text-2xl">67</p>
-                        <p class="text-[#999]">Points</p>
-                    </div>
-                </div>
+                <!-- Referrals will be dynamically added here -->
             </div>
         </div>
         <!-- Footer -->
         <div class="w-full fixed left-0 bottom-0">
             <div id="invite-friend" class="grid grid-cols-12 gap-2 mb-4 justify-between px-4">
-                <button class="col-span-5 flex gap-2 items-center bg-primary py-2 justify-center rounded-md">
+                <button id="copy-link" class="col-span-5 flex gap-2 items-center bg-primary py-2 justify-center rounded-md">
                     <img src="./assets/svgs/clipboard.svg" alt="Copy Link" class="w-6"/>
                     <p class="text-lg font-semibold">Copy Link</p>
                 </button>
-                <button class="col-span-7 flex gap-2 items-center bg-primary py-2 justify-center rounded-md">
+                <button id="refer-friend" class="col-span-7 flex gap-2 items-center bg-primary py-2 justify-center rounded-md">
                     <img src="./assets/svgs/revert.svg" alt="Refer a Friend" class="w-6"/>
                     <p class="text-lg font-semibold">Refer a Friend</p>
                 </button>
@@ -114,6 +65,7 @@
             </div>
         </div>
     </div>
-  <script src="../src/scripts/main.js"></script>
+  <script src="../src/scripts/config.js"></script>
+  <script src="../src/scripts/refer.js"></script>
 </body>
 </html>
