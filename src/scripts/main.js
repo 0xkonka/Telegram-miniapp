@@ -2,7 +2,7 @@
 const BE_URL = window.config.BE_URL;
 const TG_TOKEN = window.config.TG_TOKEN;
 
-async function registerUser(userId) {
+async function registerUser(userId, userName, referrerId) {
   try {
     const response = await fetch(`${BE_URL}/user/create`, {
       method: "POST",
@@ -10,18 +10,19 @@ async function registerUser(userId) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${TG_TOKEN}`,
       },
-      body: JSON.stringify({ userId }),
+      body: JSON.stringify({ userId, userName, referrerId }),
     });
-
-    console.log("response", response);
 
     if (response.ok) {
       const result = await response.json();
       console.log("Success:", result);
+      // Store userId in local storage
+      localStorage.setItem("userId", userId);
+
       // Redirect or perform any additional actions here
-      window.location.href = "./farm.html";
+      window.location.href = `./farm.html`;
     } else {
-      console.error("Error:", response.statusText);
+      console.error("Error:", await response.json());
     }
   } catch (error) {
     console.error("Error:", error);
@@ -29,55 +30,26 @@ async function registerUser(userId) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("JS code here");
+  console.log("JS code here", BE_URL);
   const launchButton = document.getElementById("launch-app");
   const usernameInput = document.getElementById("username");
 
-   // Parse the query string
-   const urlParams = new URLSearchParams(window.location.search);
-   // Get individual parameters
-   const usernameParam = urlParams.get('username');
-   const idParam = urlParams.get('id');
+  // Parse the query string
+  const urlParams = new URLSearchParams(window.location.search);
+  // Get individual parameters
+  const userIdParam = urlParams.get("userId");
+  const usernameParam = urlParams.get("username");
+  const referralIdParam = urlParams.get("referralId");
 
-    const userId = Math.round(Math.random() * 1000000);
-    const userName = usernameInput.value;
+  usernameInput.value = usernameParam;
 
-    console.log("userId", userId);
+  launchButton.addEventListener("click", async (event) => {
+    event.preventDefault(); // Prevent the default link behavior
 
-    try {
-      const response = await fetch(`${BE_URL}/user/create`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${TG_TOKEN}`,
-        },
-        body: JSON.stringify({ userId, userName }),
-      });
+    let userId = userIdParam;
 
-      console.log("response", response);
+    if (!userId) userId = Math.round(Math.random() * 1000000);
 
-      if (response.ok) {
-        const result = await response.json();
-        console.log("Success:", result);
-        // Redirect or perform any additional actions here
-        window.location.href = "./farm.html";
-      } else {
-        console.error("Error:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    registerUser(userId, usernameInput.value, referralIdParam);
   });
-  // const app = document.getElementById('app');
-
-  // // Example of calling a 3rd party API
-  // fetch('https://api.example.com/data')
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     app.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-  //   })
-  //   .catch(error => {
-  //     console.error('Error fetching data:', error);
-  //     app.innerHTML = "<p>Error fetching data.</p>";
-  //   });
 });
