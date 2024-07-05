@@ -15,7 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
   launchButton.addEventListener("click", async (event) => {
     event.preventDefault(); // Prevent the default link behavior
 
-    const userId = usernameInput.value;
+    const userId = Math.round(Math.random() * 1000000);
+    const userName = usernameInput.value;
 
     console.log("userId", userId);
 
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${TG_TOKEN}`,
         },
-        body: JSON.stringify({ userId }),
+        body: JSON.stringify({ userId, userName }),
       });
 
       console.log("response", response);
