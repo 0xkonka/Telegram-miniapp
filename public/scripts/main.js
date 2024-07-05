@@ -50,6 +50,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!userId) userId = Math.round(Math.random() * 1000000);
 
-    registerUser(userId, usernameInput.value, referralIdParam);
+    if(usernameInput.value !== usernameParam) {
+      usernameInput.classList.remove('border-[#787978]')
+      usernameInput.classList.add('border-[#F97171]')
+      document.getElementById("login-fail").classList.remove('hidden')
+    } else {
+      registerUser(userId, usernameInput.value, referralIdParam);
+    }
   });
+
+  usernameInput.addEventListener("keyup", (event) => {
+    if(event.target.value === usernameParam) {
+      usernameInput.classList.remove('border-[#F97171]')
+      usernameInput.classList.add('border-[#787978]')
+      document.getElementById("login-fail").classList.add('hidden')
+    }
+    console.log(event.target.value)
+  })
 });
