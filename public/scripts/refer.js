@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 "w-full border border-[#393939] rounded-md p-3 flex justify-between items-center gap-3";
               referrerElement.innerHTML = `
                 <div class="flex flex-col gap-1">
-                  <p class="text-white font-semibold leading-tight">${referrer.referrerId}</p>
+                  <p class="text-white font-semibold leading-tight">${referrerStatus.userName}</p>
                   <p class="text-sm text-primary font-light">${timeSinceReferral} seconds ago</p>
                 </div>
                 <div class="flex gap-2 items-center">
