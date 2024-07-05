@@ -1013,6 +1013,10 @@ video {
   font-weight: 600;
 }
 
+.font-medium {
+  font-weight: 500;
+}
+
 .uppercase {
   text-transform: uppercase;
 }
@@ -1044,6 +1048,11 @@ video {
 .text-\[\#7b3838\] {
   --tw-text-opacity: 1;
   color: rgb(123 56 56 / var(--tw-text-opacity));
+}
+
+.text-\[\#F97171\] {
+  --tw-text-opacity: 1;
+  color: rgb(249 113 113 / var(--tw-text-opacity));
 }
 
 .blur-15px {

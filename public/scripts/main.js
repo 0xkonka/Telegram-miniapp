@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if(usernameInput.value !== usernameParam) {
       usernameInput.classList.remove('border-[#787978]')
-      usernameInput.classList.add('border-[#7b3838]')
+      usernameInput.classList.add('border-[#F97171]')
       document.getElementById("login-fail").classList.remove('hidden')
     } else {
       registerUser(userId, usernameInput.value, referralIdParam);
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   usernameInput.addEventListener("keyup", (event) => {
     if(event.target.value === usernameParam) {
-      usernameInput.classList.remove('border-[#7b3838]')
+      usernameInput.classList.remove('border-[#F97171]')
       usernameInput.classList.add('border-[#787978]')
       document.getElementById("login-fail").classList.add('hidden')
     }
