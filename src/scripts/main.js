@@ -39,18 +39,35 @@ document.addEventListener("DOMContentLoaded", () => {
    const usernameParam = urlParams.get('username');
    const idParam = urlParams.get('id');
 
-  if(!usernameParam) {  // If username doesn't exist (Didn't pass from URL param), we create new user based on input name.
-    launchButton.addEventListener("click", async (event) => {
-      event.preventDefault(); // Prevent the default link behavior
-      const userName = usernameInput.value;
-      const userId = Math.round(Math.random() * 1000000);
-      registerUser(userId, userName)
-    });
-  } else {  // If the username already exist, we pass Signup page.
-    usernameInput.value = usernameParam
-    registerUser(idParam, usernameParam)
-  }
-  
+    const userId = Math.round(Math.random() * 1000000);
+    const userName = usernameInput.value;
+
+    console.log("userId", userId);
+
+    try {
+      const response = await fetch(`${BE_URL}/user/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${TG_TOKEN}`,
+        },
+        body: JSON.stringify({ userId, userName }),
+      });
+
+      console.log("response", response);
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Success:", result);
+        // Redirect or perform any additional actions here
+        window.location.href = "./farm.html";
+      } else {
+        console.error("Error:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  });
   // const app = document.getElementById('app');
 
   // // Example of calling a 3rd party API
