@@ -6,9 +6,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   console.log("BE_URL", BE_URL);
 
-  // Get userId from query parameters
-  const urlParams = new URLSearchParams(window.location.search);
-  const userId = urlParams.get("userId") || "cym1020"; // Default to "cym1020" if not found
+  // Get userId from local storage
+  const userId = localStorage.getItem("userId") || "cym1020"; // Default to "cym1020" if not found
 
   if (userId) {
     console.log("userId", userId);
