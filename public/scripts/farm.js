@@ -51,7 +51,6 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
           updateFarmingPoints();
         }, 1000);
-
       } else {
         console.error(
           "Error getting user status:",
@@ -67,9 +66,23 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Function to update farming points
   function updateFarmingPoints() {
-    userStatus.farmingPoint += 25 / 60 / 60; 
-    document.getElementById("farming-points").textContent =
-      userStatus.farmingPoint.toFixed(6);
+    const now = Math.floor(new Date().getTime() / 1000);
+    const elapsedTime = now - userStatus.farmStartingTime; // Time elapsed in seconds 3600
+
+    if (elapsedTime >= 8 * 3600) {
+      // Cap at 8 hours
+      userStatus.farmingPoint = userStatus.farmingPoint + 25 * 8;
+      userStatus.farmStartingTime = 0; // Reset farmStartingTime to stop further increases
+      document.getElementById("farming-points").textContent =
+        userStatus.farmingPoint.toFixed(6);
+    } else {
+      const additionalPoints = 25 / 3600;
+      userStatus.farmingPoint = userStatus.farmingPoint + additionalPoints;
+      document.getElementById("farming-points").textContent = (
+        (25 / 3600) * elapsedTime +
+        userStatus.farmingPoint
+      ).toFixed(6);
+    }
   }
 
   // Function to update remaining time
@@ -80,35 +93,39 @@ document.addEventListener("DOMContentLoaded", async () => {
       const hours = Math.floor(remainingTime / (60 * 60));
       const minutes = Math.floor((remainingTime % (60 * 60)) / 60);
       const seconds = Math.floor(remainingTime % 60);
-      document.getElementById("remaining-time").textContent = `${hours}h : ${minutes}m : ${seconds}s`;
+      document.getElementById(
+        "remaining-time"
+      ).textContent = `${hours}h : ${minutes}m : ${seconds}s`;
     } else {
       document.getElementById("remaining-time").textContent = "0h : 0m : 0s";
     }
   }
 
   // Handle "Start Farming" button click
-  document.getElementById("start-farming").addEventListener("click", async () => {
-    try {
-      const response = await fetch(`${BE_URL}/farm/start`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${TG_TOKEN}`,
-        },
-        body: JSON.stringify({ userId }),
-      });
+  document
+    .getElementById("start-farming")
+    .addEventListener("click", async () => {
+      try {
+        const response = await fetch(`${BE_URL}/farm/start`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${TG_TOKEN}`,
+          },
+          body: JSON.stringify({ userId }),
+        });
 
-      if (response.ok) {
-        const result = await response.json();
-        console.log("Farming started:", result);
-        userStatus.farmStartingTime = result.farmStartingTime;
-        initialTime = Math.floor(new Date().getTime() / 1000);
-        updateRemainingTime(userStatus.farmStartingTime, initialTime);
-      } else {
-        console.log("error: ", (await response.json()).message);
+        if (response.ok) {
+          const result = await response.json();
+          console.log("Farming started:", result);
+          userStatus.farmStartingTime = result.farmStartingTime;
+          initialTime = Math.floor(new Date().getTime() / 1000);
+          updateRemainingTime(userStatus.farmStartingTime, initialTime);
+        } else {
+          console.log("error: ", (await response.json()).message);
+        }
+      } catch (error) {
+        console.error("Error:", error);
       }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  });
+    });
 });
