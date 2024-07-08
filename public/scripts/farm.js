@@ -28,7 +28,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Display user status
         document.getElementById("farming-points").textContent =
-          userStatus.farmingPoint.toFixed(6) || "0.000000";
+          userStatus.farmingPoint.toLocaleString('en-US', {
+            minimumFractionDigits: 6,
+            maximumFractionDigits: 6
+          }) || "0.000000";
         document.getElementById("referrers-count").textContent =
           userStatus.referrers.length || "0";
         document.getElementById("referral-points").textContent =
@@ -71,14 +74,20 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("farming-points").textContent = (
         userStatus.farmingPoint +
         25 * 8
-      ).toFixed(6);
+      ).toLocaleString('en-US', {
+        minimumFractionDigits: 6,
+        maximumFractionDigits: 6
+      });
     } else {
       const additionalPoints = 25 / 3600;
       userStatus.farmingPoint = userStatus.farmingPoint + additionalPoints;
       document.getElementById("farming-points").textContent = (
         (25 / 3600) * elapsedTime +
         userStatus.farmingPoint
-      ).toFixed(6);
+      ).toLocaleString('en-US', {
+          minimumFractionDigits: 6,
+          maximumFractionDigits: 6
+      });
     }
   }
 
