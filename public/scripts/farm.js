@@ -71,10 +71,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (elapsedTime >= 8 * 3600) {
       // Cap at 8 hours
-      userStatus.farmingPoint = userStatus.farmingPoint + 25 * 8;
-      userStatus.farmStartingTime = 0; // Reset farmStartingTime to stop further increases
+      // userStatus.farmingPoint = userStatus.farmingPoint + 25 * 8;
+      // userStatus.farmStartingTime = 0; // Reset farmStartingTime to stop further increases
       document.getElementById("farming-points").textContent =
-        userStatus.farmingPoint.toFixed(6);
+        (userStatus.farmingPoint + 25 * 8).toFixed(6);
     } else {
       const additionalPoints = 25 / 3600;
       userStatus.farmingPoint = userStatus.farmingPoint + additionalPoints;
