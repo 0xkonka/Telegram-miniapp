@@ -6,6 +6,7 @@
   <title>Telegram Mini App</title>
   <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="dist/output.css" rel="stylesheet">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body class="app-bg flex items-center justify-center min-h-screen">
     <div id="app" class="px-4  w-full min-h-screen h-screen">
@@ -34,40 +35,5 @@
     </div>
     <script src="./scripts/config.js"></script>
     <script src="./scripts/main.js"></script>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
-        // === Get Telegram userid and name in my web app without passing param.
-        const tg = window.Telegram.WebApp;
-        // Check if user data is available
-        if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
-            const user = tg.initDataUnsafe.user;
-            
-            // You now have access to the user data
-            alert('User ID: ' + user.id)
-            alert('User Name: ' + user.username)
-            // console.log('User ID:', user.id);
-            // console.log('Username:', user.username);
-            // console.log('First Name:', user.first_name);
-            // console.log('Last Name:', user.last_name);
-
-            // Do something with this data (e.g., send it to your server)
-        } else {
-            // Handle case where user data is not available
-            console.log('No user data available');
-        }
-
-
-
-        // Open the TG App in full screen
-        Telegram.WebApp.onEvent('viewportChanged', function(height){
-            if (height == window.innerHeight) {
-                return;
-            }
-            Telegram.WebApp.expand();
-        });
-
-        // Immediately attempt to expand
-        Telegram.WebApp.expand();
-    </script>
 </body>
 </html>

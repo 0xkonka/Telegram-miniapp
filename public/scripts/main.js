@@ -2,6 +2,28 @@
 const BE_URL = window.config.BE_URL;
 const TG_TOKEN = window.config.TG_TOKEN;
 
+// === Get Telegram userid and name in my web app without passing param.
+function getUserInfo () {
+  const tg = window.Telegram.WebApp;
+  // Check if user data is available
+  if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+      const user = tg.initDataUnsafe.user;
+      // You now have access to the user data
+      return {
+          userid: user.id,
+          username: user.username,
+      }
+      // Do something with this data (e.g., send it to your server)
+  } else {
+      // Handle case where user data is not available
+      console.log('No user data available');
+      return {
+          userid: 0,
+          username: 0
+      }
+  }
+}
+
 async function registerUser(userId, userName, referrerId) {
   try {
     const response = await fetch(`${BE_URL}/user/create`, {
@@ -31,15 +53,30 @@ async function registerUser(userId, userName, referrerId) {
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("JS code here", BE_URL);
+
+  // === Open the TG App in big screen === //
+  Telegram.WebApp.onEvent('viewportChanged', function(height){
+      if (height == window.innerHeight) {
+          return;
+      }
+      Telegram.WebApp.expand();
+  });
+  // Immediately attempt to expand
+  Telegram.WebApp.expand();
+
+  // ==== Register User === //
   const launchButton = document.getElementById("launch-app");
   const usernameInput = document.getElementById("username");
 
-  // Parse the query string
-  const urlParams = new URLSearchParams(window.location.search);
+  // const urlParams = new URLSearchParams(window.location.search);
   // Get individual parameters
-  const userIdParam = urlParams.get("userId");
-  const usernameParam = urlParams.get("username");
-  const referralIdParam = urlParams.get("referralId");
+  // const userIdParam = urlParams.get("userId");
+  // const usernameParam = urlParams.get("username");
+  // const referralIdParam = urlParams.get("referralId");
+  const user = getUserInfo()
+  const userIdParam = user.userId
+  const usernameParam = user.username
+  const referralIdParam = 0
 
   usernameInput.value = usernameParam;
 
