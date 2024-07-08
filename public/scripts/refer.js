@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       `Get 2,000 bonus points when you start farming Tren Finance points using a referral link!\nTren Finance is a DeFi protocol launching soon, and they are inviting you to start farming points in their new mini game.\n\nClick here to open the Telegram bot and claim your bonus:\n\n${referralLink}`
     );
     window.open(
-      `https://t.me/share/url?text=${message}`,
+      `https://t.me/share/url?url=${message}`,
       "_blank"
     );
   });
