@@ -7,10 +7,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   console.log("BE_URL", BE_URL);
 
   // Get userId from local storage
-  const userId = localStorage.getItem("userId") || "cym1020"; // Default to "cym1020" if not found
+  const userId = localStorage.getItem("userId");
 
   let userStatus = null;
-  let initialTime = null;
 
   if (userId) {
     console.log("userId", userId);
@@ -39,21 +38,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (userStatus.farmStartingTime == 0) {
           document.getElementById("remaining-time").textContent =
             "0h : 0m : 0s";
-        } else {
-          initialTime = Math.floor(new Date().getTime() / 1000);
-          updateRemainingTime(userStatus.farmStartingTime, initialTime);
-          if (calculateRemainingTime(userStatus.farmStartingTime, initialTime) > 0) {
-            disableFarmingButton();
-          }
         }
+        // else {
+        // updateRemainingTime(userStatus.farmStartingTime);
+        // if (calculateRemainingTime(userStatus.farmStartingTime) > 0) {
+        //   disableFarmingButton();
+        // }
 
         // Start interval to update points and time every second
         setInterval(() => {
-          if (userStatus.farmStartingTime != 0) {
-            updateRemainingTime(userStatus.farmStartingTime, initialTime);
-          }
+          console.log("a");
+          // if (userStatus.farmStartingTime != 0) {
+          updateRemainingTime(userStatus.farmStartingTime);
           updateFarmingPoints();
+          // }
         }, 1000);
+        // }
       } else {
         console.error(
           "Error getting user status:",
@@ -69,13 +69,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Function to update farming points
   function updateFarmingPoints() {
+    if (userStatus.farmStartingTime == 0) return;
     const now = Math.floor(new Date().getTime() / 1000);
     const elapsedTime = now - userStatus.farmStartingTime; // Time elapsed in seconds 3600
 
     if (elapsedTime >= 8 * 3600) {
       // Cap at 8 hours
-      document.getElementById("farming-points").textContent =
-        (userStatus.farmingPoint + 25 * 8).toFixed(6);
+      document.getElementById("farming-points").textContent = (
+        userStatus.farmingPoint +
+        25 * 8
+      ).toFixed(6);
     } else {
       const additionalPoints = 25 / 3600;
       userStatus.farmingPoint = userStatus.farmingPoint + additionalPoints;
@@ -87,9 +90,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Function to update remaining time
-  function updateRemainingTime(farmStartingTime, initialTime) {
-    const now = Math.floor(new Date().getTime() / 1000);
-    const remainingTime = farmStartingTime + 8 * 60 * 60 - now;
+  function updateRemainingTime(farmStartingTime) {
+    if (userStatus.farmStartingTime == 0) return;
+    const remainingTime = calculateRemainingTime(farmStartingTime);
     if (remainingTime > 0) {
       const hours = Math.floor(remainingTime / (60 * 60));
       const minutes = Math.floor((remainingTime % (60 * 60)) / 60);
@@ -105,7 +108,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Function to calculate remaining time in seconds
-  function calculateRemainingTime(farmStartingTime, initialTime) {
+  function calculateRemainingTime(farmStartingTime) {
     const now = Math.floor(new Date().getTime() / 1000);
     return farmStartingTime + 8 * 60 * 60 - now;
   }
@@ -139,12 +142,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         if (response.ok) {
-          const result = await response.json();
+          const result = (await response.json()).data;
           console.log("Farming started:", result);
-          userStatus.farmStartingTime = result.farmStartingTime;
-          initialTime = Math.floor(new Date().getTime() / 1000);
-          updateRemainingTime(userStatus.farmStartingTime, initialTime);
-          disableFarmingButton();
+          userStatus.farmingPoint = result;
+          userStatus.farmStartingTime = Math.floor(new Date().getTime() / 1000);
+          updateRemainingTime(userStatus.farmStartingTime);
+          // disableFarmingButton();
+
+          // Start interval to update points and time every second
+          // setInterval(() => {
+          //   console.log("b")
+          //   updateRemainingTime(userStatus.farmStartingTime);
+          //   updateFarmingPoints();
+          // }, 1000);
         } else {
           console.log("error: ", (await response.json()).message);
         }

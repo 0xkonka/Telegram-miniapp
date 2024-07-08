@@ -6,6 +6,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   console.log("BE_URL", BE_URL);
 
+  // Initialize Telegram Web App
+  const tg = window.Telegram.WebApp;
+  tg.expand(); // Expand the app to the maximum available height
+
   // Get userId from local storage
   const userId = localStorage.getItem("userId") || "cym1020"; // Default to "cym1020" if not found
 
@@ -52,11 +56,10 @@ document.addEventListener("DOMContentLoaded", async () => {
               referrerElement.innerHTML = `
                 <div class="flex flex-col gap-1">
                   <p class="text-white font-semibold leading-tight">${referrerStatus.userName}</p>
-                  <p class="text-sm text-primary font-light">${timeSinceReferral} seconds ago</p>
                 </div>
                 <div class="flex gap-2 items-center">
                   <p class="font-britanica text-white text-2xl">${totalPoints}</p>
-                  <p class="text-[#999]">Points</p>
+                  <p class="text-white">Points</p>
                 </div>
               `;
               referralsList.appendChild(referrerElement);
@@ -77,28 +80,21 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.error("Error:", error);
     }
   } else {
-    console.error("No userId found in query parameters");
+    console.error("No userId found in local storage");
   }
 
   // Handle "Copy Link" button click
   document.getElementById("copy-link").addEventListener("click", () => {
-    const referralLink = `${window.location.origin}/refer.html?userId=${userId}`;
-    navigator.clipboard
-      .writeText(referralLink)
-      .then(() => {
-        alert("Referral link copied to clipboard");
-      })
-      .catch((err) => {
-        console.error("Error copying link: ", err);
-      });
+    const referralLink = `${window.location.origin}/refer.html?referralId=${userId}`;
+    tg.showAlert("Referral link copied to clipboard");
+    tg.setClipboardText(referralLink);
   });
 
   // Handle "Refer a Friend" button click
   document.getElementById("refer-friend").addEventListener("click", () => {
-    const referralLink = `${window.location.origin}/refer.html?userId=${userId}`;
-    window.open(
-      `mailto:?subject=Join me on Tren&body=Join me on Tren and earn points! Here's my referral link: ${referralLink}`,
-      "_blank"
-    );
+    const referralLink = `${window.location.origin}/refer.html?referralId=${userId}`;
+    tg.shareData({
+      text: `Join me on Tren and earn points! Here's my referral link: ${referralLink}`
+    });
   });
 });
