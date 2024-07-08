@@ -38,17 +38,22 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         userStatus.referrers.forEach(async (referrer) => {
           try {
-            const referrerStatusResponse = await fetch(`${BE_URL}/status/${referrer.referrerId}`, {
-              method: "GET",
-              headers: {
-                Authorization: `Bearer ${TG_TOKEN}`,
-              },
-            });
+            const referrerStatusResponse = await fetch(
+              `${BE_URL}/status/${referrer.referrerId}`,
+              {
+                method: "GET",
+                headers: {
+                  Authorization: `Bearer ${TG_TOKEN}`,
+                },
+              }
+            );
 
             if (referrerStatusResponse.ok) {
               const referrerStatus = (await referrerStatusResponse.json()).data;
-              const totalPoints = referrerStatus.farmingPoint + referrerStatus.referralPoint;
-              const timeSinceReferral = Math.floor(new Date().getTime() / 1000) - referrer.timestamp;
+              const totalPoints =
+                referrerStatus.farmingPoint + referrerStatus.referralPoint;
+              const timeSinceReferral =
+                Math.floor(new Date().getTime() / 1000) - referrer.timestamp;
 
               const referrerElement = document.createElement("div");
               referrerElement.className =
@@ -64,7 +69,10 @@ document.addEventListener("DOMContentLoaded", async () => {
               `;
               referralsList.appendChild(referrerElement);
             } else {
-              console.error("Error getting referrer status:", referrerStatusResponse.statusText);
+              console.error(
+                "Error getting referrer status:",
+                referrerStatusResponse.statusText
+              );
             }
           } catch (error) {
             console.error("Error:", error);
@@ -83,18 +91,31 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("No userId found in local storage");
   }
 
+  // Function to copy text to clipboard
+  function copyToClipboard(text) {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        alert("Referral link copied to clipboard");
+      })
+      .catch((err) => {
+        console.error("Failed to copy text: ", err);
+      });
+  }
+
   // Handle "Copy Link" button click
   document.getElementById("copy-link").addEventListener("click", () => {
     const referralLink = `${window.location.origin}/refer.html?referralId=${userId}`;
-    tg.showAlert("Referral link copied to clipboard");
-    tg.setClipboardText(referralLink);
+    copyToClipboard(`https://t.me/trenfinance_bot?referralId=${userId}`);
   });
 
   // Handle "Refer a Friend" button click
   document.getElementById("refer-friend").addEventListener("click", () => {
     const referralLink = `${window.location.origin}/refer.html?referralId=${userId}`;
-    tg.shareData({
-      text: `Join me on Tren and earn points! Here's my referral link: ${referralLink}`
-    });
+    console.log("referralLink", referralLink);
+    window.open(
+      `https://t.me/share/url?url=https://t.me/trenfinance_bot?referralId=${userId}`,
+      "_blank"
+    );
   });
 });
