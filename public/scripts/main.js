@@ -19,7 +19,7 @@ function getUserInfo () {
       console.log('No user data available');
       return {
           userid: 0,
-          username: 0
+          username: ''
       }
   }
 }
