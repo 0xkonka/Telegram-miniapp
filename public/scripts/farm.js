@@ -39,16 +39,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           document.getElementById("remaining-time").textContent =
             "0h : 0m : 0s";
         }
-        // else {
-        // updateRemainingTime(userStatus.farmStartingTime);
-        // if (calculateRemainingTime(userStatus.farmStartingTime) > 0) {
-        //   disableFarmingButton();
-        // }
 
         // Start interval to update points and time every second
         setInterval(() => {
-          console.log("a");
-          // if (userStatus.farmStartingTime != 0) {
           updateRemainingTime(userStatus.farmStartingTime);
           updateFarmingPoints();
           // }
@@ -147,14 +140,6 @@ document.addEventListener("DOMContentLoaded", async () => {
           userStatus.farmingPoint = result;
           userStatus.farmStartingTime = Math.floor(new Date().getTime() / 1000);
           updateRemainingTime(userStatus.farmStartingTime);
-          // disableFarmingButton();
-
-          // Start interval to update points and time every second
-          // setInterval(() => {
-          //   console.log("b")
-          //   updateRemainingTime(userStatus.farmStartingTime);
-          //   updateFarmingPoints();
-          // }, 1000);
         } else {
           console.log("error: ", (await response.json()).message);
         }
