@@ -40,9 +40,9 @@
         const tg = window.Telegram.WebApp;
         // Check if user data is available
         if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
-            alert(tg.initDataUnsafe);
+            alert(JSON.stringify(tg.initDataUnsafe, null, 2));
             const user = tg.initDataUnsafe.user;
-            alert(user);
+            alert(JSON.stringify(user, null, 2));
             
             // You now have access to the user data
             alert('User ID: ', user.id)
