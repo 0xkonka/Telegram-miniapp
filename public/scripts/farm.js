@@ -42,6 +42,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         } else {
           initialTime = Math.floor(new Date().getTime() / 1000);
           updateRemainingTime(userStatus.farmStartingTime, initialTime);
+          if (calculateRemainingTime(userStatus.farmStartingTime, initialTime) > 0) {
+            disableFarmingButton();
+          }
         }
 
         // Start interval to update points and time every second
@@ -71,8 +74,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (elapsedTime >= 8 * 3600) {
       // Cap at 8 hours
-      // userStatus.farmingPoint = userStatus.farmingPoint + 25 * 8;
-      // userStatus.farmStartingTime = 0; // Reset farmStartingTime to stop further increases
       document.getElementById("farming-points").textContent =
         (userStatus.farmingPoint + 25 * 8).toFixed(6);
     } else {
@@ -96,9 +97,31 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById(
         "remaining-time"
       ).textContent = `${hours}h : ${minutes}m : ${seconds}s`;
+      disableFarmingButton();
     } else {
       document.getElementById("remaining-time").textContent = "0h : 0m : 0s";
+      enableFarmingButton();
     }
+  }
+
+  // Function to calculate remaining time in seconds
+  function calculateRemainingTime(farmStartingTime, initialTime) {
+    const now = Math.floor(new Date().getTime() / 1000);
+    return farmStartingTime + 8 * 60 * 60 - now;
+  }
+
+  // Function to disable the farming button
+  function disableFarmingButton() {
+    const button = document.getElementById("start-farming");
+    button.disabled = true;
+    button.classList.add("disabled");
+  }
+
+  // Function to enable the farming button
+  function enableFarmingButton() {
+    const button = document.getElementById("start-farming");
+    button.disabled = false;
+    button.classList.remove("disabled");
   }
 
   // Handle "Start Farming" button click
@@ -121,6 +144,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           userStatus.farmStartingTime = result.farmStartingTime;
           initialTime = Math.floor(new Date().getTime() / 1000);
           updateRemainingTime(userStatus.farmStartingTime, initialTime);
+          disableFarmingButton();
         } else {
           console.log("error: ", (await response.json()).message);
         }
