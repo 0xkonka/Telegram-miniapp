@@ -14,7 +14,7 @@
             <div id="title">
                 <div class="flex flex-col">
                     <p class="text-3xl text-center text-white font-britanica mb-8">
-                        10 tasks available
+                        3 tasks available
                     </p>
                     <p class="max-w-xs text-center text-white font-light leading-tight mb-12 mx-auto">
                         We’ll reward you immediately with points after each task completion.
@@ -29,7 +29,7 @@
                         <p class="text-sm text-white font-light">+100 POINTS</p>
                     </div>
                     <div class="ml-auto">
-                        <button id="start-telegram" class="bg-[#181818] px-4 py-1 rounded-full text-white font-semibold">Start</button>
+                        <a id="start-telegram" class="bg-[#181818] px-4 py-1 rounded-full text-white font-semibold" href="https://t.me/trenfinance" target="_blank">Start</a>
                     </div>
                 </div>
                 <div class="w-full border border-[#393939] rounded-md p-3 flex items-center gap-3">
@@ -39,7 +39,7 @@
                         <p class="text-sm text-white font-light">+100 POINTS</p>
                     </div>
                     <div class="ml-auto">
-                        <button id="start-discord" class="bg-[#181818] px-4 py-1 rounded-full text-white font-semibold">Start</button>
+                        <a id="start-discord" class="bg-[#181818] px-4 py-1 rounded-full text-white font-semibold" href="https://discord.com/invite/trenfinance" target="_blank">Start</a>
                     </div>
                 </div>
                 <div class="w-full border border-[#393939] rounded-md p-3 flex items-center gap-3">
@@ -49,24 +49,24 @@
                         <p class="text-sm text-white font-light">+100 POINTS</p>
                     </div>
                     <div class="ml-auto">
-                        <button id="start-twitter" class="bg-[#181818] px-4 py-1 rounded-full text-white font-semibold">Start</button>
+                        <a id="start-twitter" class="bg-[#181818] px-4 py-1 rounded-full text-white font-semibold" href="https://twitter.com/TrenFinance" target="_blank">Start</a>
                     </div>
                 </div>
             </div>
 
             <div id="task-progression" class="mt-16">
                 <div class="w-full rounded-full bg-[#1C1C1C] h-2 relative">
-                    <svg class="absolute top-[-50px]" xmlns="http://www.w3.org/2000/svg" width="40" height="34" viewBox="0 0 57 34" fill="none"
-                        style="left:calc(30% - 25px)">
+                    <svg id="progress-comment" class="absolute top-[-50px]" xmlns="http://www.w3.org/2000/svg" width="40" height="34" viewBox="0 0 57 34" fill="none"
+                        style="left:calc(0% - 25px)">
                         <path d="M34.2966 27.0942H33.7575L33.798 27.6318L34.1837 32.7468L28.9393 27.7792C28.475 27.3393 27.8597 27.0942 27.2201 27.0942H2C1.17157 27.0942 0.5 26.4226 0.5 25.5942V2C0.5 1.17157 1.17157 0.5 2 0.5H55C55.8284 0.5 56.5 1.17157 56.5 2V25.5942C56.5 26.4226 55.8284 27.0942 55 27.0942H34.2966Z" fill="#67DAB1" fill-opacity="0.2" stroke="#67DAB1"/>
                     </svg>
-                    <p class="absolute text-sm font-semibold text-primary top-[-46px]"
-                        style="left:calc(30% - 20px)">
+                    <p id="progress-label" class="absolute text-sm font-semibold text-primary top-[-46px]"
+                        style="left:calc(0% - 20px)">
                         30%
                     </p>
-                    <div id="progress" class="rounded-full bg-[#67DAB1] h-full" style="width:30%"></div>
-                    <svg class="absolute top-1/2 -translate-y-1/2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                        style="left:calc(30% - 15px)">
+                    <div id="progress" class="rounded-full bg-[#67DAB1] h-full" style="width:0px"></div>
+                    <svg id="progress-indicator" class="absolute top-1/2 -translate-y-1/2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                        style="left:calc(0% - 15px)">
                         <circle cx="10" cy="10" r="10" fill="#67DAB1" fill-opacity="0.3"/>
                         <circle cx="10" cy="10" r="5.5" fill="#67DAB1"/>
                     </svg>
