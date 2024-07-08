@@ -36,6 +36,29 @@
     <script src="./scripts/main.js"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
+        // === Get Telegram userid and name in my web app without passing param.
+        const tg = window.Telegram.WebApp;
+        // Check if user data is available
+        if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+            const user = tg.initDataUnsafe.user;
+            
+            // You now have access to the user data
+            alert('User ID: ', user.id)
+            alert('User Name: ', user.username)
+            // console.log('User ID:', user.id);
+            // console.log('Username:', user.username);
+            // console.log('First Name:', user.first_name);
+            // console.log('Last Name:', user.last_name);
+
+            // Do something with this data (e.g., send it to your server)
+        } else {
+            // Handle case where user data is not available
+            console.log('No user data available');
+        }
+
+
+
+        // Open the TG App in full screen
         Telegram.WebApp.onEvent('viewportChanged', function(height){
             if (height == window.innerHeight) {
                 return;
