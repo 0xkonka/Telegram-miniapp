@@ -82,22 +82,21 @@ async function checkUserStatus(userId) {
 document.addEventListener("DOMContentLoaded", async() => {
   console.log("JS code here", BE_URL);
 
-  // === Open the TG App in big screen === //
-  Telegram.WebApp.onEvent('init', function(){
-    Telegram.WebApp.setHeaderColor('bg_color', '#101010');
-    Telegram.WebApp.expand();
-  });
-  // Initialize the Telegram Mini App
-  Telegram.WebApp.ready();
-
-  // Telegram.WebApp.onEvent('viewportChanged', function(height){
-  //     if (height == window.innerHeight) {
-  //         return;
-  //     }
-  //     Telegram.WebApp.expand();
+  // // === Open the TG App in big screen === //
+  // Telegram.WebApp.onEvent('init', function(){
+  //   Telegram.WebApp.setHeaderColor('bg_color', '#101010');
   // });
-  // // Immediately attempt to expand
-  // Telegram.WebApp.expand();
+  // // Initialize the Telegram Mini App
+  // Telegram.WebApp.ready();
+
+  Telegram.WebApp.onEvent('viewportChanged', function(height){
+      if (height == window.innerHeight) {
+          return;
+      }
+      Telegram.WebApp.expand();
+  });
+  // Immediately attempt to expand
+  Telegram.WebApp.expand();
 
   // ==== Register User === //
   const launchButton = document.getElementById("launch-app");
