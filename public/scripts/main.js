@@ -74,9 +74,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // const usernameParam = urlParams.get("username");
   // const referralIdParam = urlParams.get("referralId");
   const user = getUserInfo()
-  alert('User ID: ' + user.userId);
+  alert('User ID: ' + user.userid);
   
-  const userIdParam = user.userId
+  const userIdParam = user.userid
   const usernameParam = user.username
   const referralIdParam = 0
 
