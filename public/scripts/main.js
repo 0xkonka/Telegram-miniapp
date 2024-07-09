@@ -51,7 +51,35 @@ async function registerUser(userId, userName, referrerId) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+async function checkUserStatus(userId) {
+  try {
+    const userStatusResponse = await fetch(`${BE_URL}/status/${userId}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${TG_TOKEN}`,
+      },
+    });
+
+    if (userStatusResponse.ok) {
+      userExist = (await userStatusResponse.json()).result;
+      if(userExist == true) {
+        localStorage.setItem("userId", userId);
+        // Redirect or perform any additional actions here
+        window.location.href = `./farm.html`;
+      }
+      // }
+    } else {
+      console.error(
+        "Error getting user status:",
+        userStatusResponse.statusText
+      );
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", async() => {
   console.log("JS code here", BE_URL);
 
   // === Open the TG App in big screen === //
@@ -68,11 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const launchButton = document.getElementById("launch-app");
   const usernameInput = document.getElementById("username");
 
-  // const urlParams = new URLSearchParams(window.location.search);
-  // Get individual parameters
-  // const userIdParam = urlParams.get("userId");
-  // const usernameParam = urlParams.get("username");
-  // const referralIdParam = urlParams.get("referralId");
   const user = getUserInfo()
   const userIdParam = user.userid
   const usernameParam = user.username
