@@ -8,12 +8,12 @@
   <link href="dist/output.css" rel="stylesheet">
 </head>
 <body class="app-bg flex items-center justify-center min-h-screen">
-    <div id="app" class="px-4 pt-12 pb-32  w-full min-h-screen h-full">
+    <div id="app" class="px-4 pt-12 pb-24  w-full min-h-screen h-full">
         <!-- Content Here -->
         <div id="content">
             <div id="title">
                 <div class="flex flex-col">
-                    <p class="text-xl text-center text-white mb-2">
+                    <p class="text-xl text-center text-white">
                         Tren Points
                     </p>
                     <p id="farming-points" class="text-primary text-center text-4xl font-britanica">
@@ -21,7 +21,7 @@
                     </p>
                 </div>
             </div>
-            <div class="mt-10">
+            <div class="mt-8 z-20 relative">
                 <p class="text-xl text-center text-white">
                     Next claim in:
                 </p>
@@ -30,9 +30,9 @@
                 </p>
             </div>
             <div class="relative">
-                <div class="absolute w-full left-[-16px] top-0 h-[50px] blur-15px bg-[#030303] rounded-[200px]"></div>
+                <div class="absolute w-screen left-[-16px] top-[-25px] h-[50px] blur-15px bg-[#030303] rounded-[200px]"></div>
             </div>
-            <div class="h-[250px] mx-[-16px] my-10 relative overflow-y-hidden">
+            <div class="h-[250px] mx-[-16px] relative overflow-y-hidden">
                 <video class="absolute z-[-1] w-full top-[-250px]">
                     <source src="./assets/videos/home-video.mp4" type="video/mp4">
                     <source src="./assets/videos/home-video.mp4" type="video/ogg">
@@ -40,9 +40,9 @@
                   </video>
             </div>
             <div class="relative">
-                <div class="absolute w-full left-[-16px] top-[-60px] h-[50px] blur-15px bg-[#030303] rounded-[200px]"></div>
+                <div class="absolute w-screen left-[-16px] top-[-25px] h-[50px] blur-15px bg-[#030303] rounded-[200px]"></div>
             </div>
-            <div id="social-tasks" class="flex flex-col gap-2">
+            <div id="social-tasks" class="flex flex-col gap-2 relative z-20">
                 <div class="w-full border border-[#393939] rounded-md p-3 flex items-center gap-3">
                     <img src="./assets/svgs/refer-green.svg" alt="Referrals" class="w-6 h-6"/>
                     <p class="text-white font-semibold leading-tight">Successful Referrals</p>
