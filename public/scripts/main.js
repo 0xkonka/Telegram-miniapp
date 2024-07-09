@@ -112,7 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const userIdParam = user.userid
   const usernameParam = user.username
   const referralIdParam = urlParams.get("referralId");
-  alert("This is your referral Id: " + referralIdParam)
   
   usernameInput.value = usernameParam;
 
