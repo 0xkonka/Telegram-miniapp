@@ -1,10 +1,53 @@
+// === Get Telegram userid and name in my web app without passing param.
+function getUserInfo () {
+  const tg = window.Telegram.WebApp;
+  // Check if user data is available
+  if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+      const user = tg.initDataUnsafe.user;
+      // You now have access to the user data
+      return {
+          userid: user.id,
+          username: user.username,
+      }
+      // Do something with this data (e.g., send it to your server)
+  } else {
+      // Handle case where user data is not available
+      console.log('No user data available');
+      return {
+          userid: 0,
+          username: ''
+      }
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("Farm JS code here");
+  
+  // === Open the TG App in big screen === //
+  Telegram.WebApp.onEvent('init', function(){
+    Telegram.WebApp.setHeaderColor('bg_color', '#101010');
+  });
+  // Initialize the Telegram Mini App
+  Telegram.WebApp.ready();
+
+  Telegram.WebApp.onEvent('viewportChanged', function(height){
+      if (height == window.innerHeight) {
+          return;
+      }
+      Telegram.WebApp.expand();
+  });
+  // Immediately attempt to expand
+  Telegram.WebApp.expand();
+  // ==================================== //
+
+  // == If user navigated farm page directly (already registered user) == //
+  const user = getUserInfo()
+  const userIdParam = user.userid
+  localStorage.setItem("userId", userIdParam);
+  // ==================================== //
 
   const BE_URL = window.config.BE_URL;
   const TG_TOKEN = window.config.TG_TOKEN;
-
-  console.log("BE_URL", BE_URL);
 
   // Get userId from local storage
   const userId = localStorage.getItem("userId");

@@ -51,10 +51,44 @@ async function registerUser(userId, userName, referrerId) {
   }
 }
 
+// async function checkUserStatus(userId) {
+//   try {
+//     const userStatusResponse = await fetch(`${BE_URL}/status/${userId}`, {
+//       method: "GET",
+//       headers: {
+//         Authorization: `Bearer ${TG_TOKEN}`,
+//       },
+//     });
+
+//     if (userStatusResponse.ok) {
+//       userExist = (await userStatusResponse.json()).result;
+//       if(userExist == true) {
+//         localStorage.setItem("userId", userId);
+//         // Redirect or perform any additional actions here
+//         window.location.href = `./farm.html`;
+//       }
+//       // }
+//     } else {
+//       console.error(
+//         "Error getting user status:",
+//         userStatusResponse.statusText
+//       );
+//     }
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// }
+
 document.addEventListener("DOMContentLoaded", () => {
   console.log("JS code here", BE_URL);
 
   // === Open the TG App in big screen === //
+  Telegram.WebApp.onEvent('init', function(){
+    Telegram.WebApp.setHeaderColor('bg_color', '#101010');
+  });
+  // Initialize the Telegram Mini App
+  Telegram.WebApp.ready();
+
   Telegram.WebApp.onEvent('viewportChanged', function(height){
       if (height == window.innerHeight) {
           return;
@@ -71,10 +105,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   
   const user = getUserInfo()
-  const userIdParam = user.userId
+  const userIdParam = user.userid
   const usernameParam = user.username
   const referralIdParam = urlParams.get("referralId");
-  console.log('referralIdParam', referralIdParam)
   
   usernameInput.value = usernameParam;
 
