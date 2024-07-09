@@ -5,10 +5,10 @@ const TG_TOKEN = window.config.TG_TOKEN;
 // === Get Telegram userid and name in my web app without passing param.
 function getUserInfo () {
   const tg = window.Telegram.WebApp;
-  console.log('tg', tg)
-  const initData = Telegram.WebApp.initData || window.location.search;
-  console.log('initData', initData)
-  alert(tg.initDataUnsafe.start_param)
+  // console.log('tg', tg)
+  // const initData = Telegram.WebApp.initData || window.location.search;
+  // console.log('initData', initData)
+  // alert(tg.initDataUnsafe.start_param)
   // Check if user data is available
   if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
       const user = tg.initDataUnsafe.user;
@@ -112,6 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const userIdParam = user.userid
   const usernameParam = user.username
   const referralIdParam = urlParams.get("referralId");
+  alert("This is your referral Id: " + referralIdParam)
   
   usernameInput.value = usernameParam;
 
