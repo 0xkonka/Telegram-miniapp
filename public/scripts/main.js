@@ -51,35 +51,35 @@ async function registerUser(userId, userName, referrerId) {
   }
 }
 
-async function checkUserStatus(userId) {
-  try {
-    const userStatusResponse = await fetch(`${BE_URL}/status/${userId}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${TG_TOKEN}`,
-      },
-    });
+// async function checkUserStatus(userId) {
+//   try {
+//     const userStatusResponse = await fetch(`${BE_URL}/status/${userId}`, {
+//       method: "GET",
+//       headers: {
+//         Authorization: `Bearer ${TG_TOKEN}`,
+//       },
+//     });
 
-    if (userStatusResponse.ok) {
-      userExist = (await userStatusResponse.json()).result;
-      if(userExist == true) {
-        localStorage.setItem("userId", userId);
-        // Redirect or perform any additional actions here
-        window.location.href = `./farm.html`;
-      }
-      // }
-    } else {
-      console.error(
-        "Error getting user status:",
-        userStatusResponse.statusText
-      );
-    }
-  } catch (error) {
-    console.error("Error:", error);
-  }
-}
+//     if (userStatusResponse.ok) {
+//       userExist = (await userStatusResponse.json()).result;
+//       if(userExist == true) {
+//         localStorage.setItem("userId", userId);
+//         // Redirect or perform any additional actions here
+//         window.location.href = `./farm.html`;
+//       }
+//       // }
+//     } else {
+//       console.error(
+//         "Error getting user status:",
+//         userStatusResponse.statusText
+//       );
+//     }
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// }
 
-document.addEventListener("DOMContentLoaded", async() => {
+document.addEventListener("DOMContentLoaded", () => {
   console.log("JS code here", BE_URL);
 
   // === Open the TG App in big screen === //
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", async() => {
   const userIdParam = user.userid
   const usernameParam = user.username
   const referralIdParam = 0
-  await checkUserStatus(userIdParam)
+  // await checkUserStatus(userIdParam)
 
   usernameInput.value = usernameParam;
 
