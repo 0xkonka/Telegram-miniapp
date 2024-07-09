@@ -83,9 +83,12 @@ document.addEventListener("DOMContentLoaded", async() => {
   console.log("JS code here", BE_URL);
 
   // === Open the TG App in big screen === //
-  Telegram.WebApp.onEvent('init', function(height){
+  Telegram.WebApp.onEvent('init', function(){
     Telegram.WebApp.setHeaderColor('bg_color', '#101010');
   });
+  // Initialize the Telegram Mini App
+  Telegram.WebApp.ready();
+
   Telegram.WebApp.onEvent('viewportChanged', function(height){
       if (height == window.innerHeight) {
           return;
