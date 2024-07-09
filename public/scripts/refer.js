@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const message =
       "\nTren Finance is a DeFi protocol launching soon, and they are inviting you to start farming points in their new mini game.\n\n";
     const comment =
-      "Get 2,000 bonus points when you start farming Tren Finance points using a referral link!\n\nClick here to open the Telegram bot and claim your bonus:";
+      "**Get 2,000 bonus points when you start farming Tren Finance points using a referral link!**\n\nClick the link above to open the Telegram bot and claim your bonus:";
     const url = `https://t.me/share/url?url=${encodeURIComponent(
       referralLink
     )}&text=${encodeURIComponent(message + comment)}`;
