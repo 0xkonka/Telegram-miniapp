@@ -8,6 +8,7 @@ function getUserInfo () {
   console.log('tg', tg)
   const initData = Telegram.WebApp.initData || window.location.search;
   console.log('initData', initData)
+  alert(tg.initDataUnsafe.start_param)
   // Check if user data is available
   if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
       const user = tg.initDataUnsafe.user;
