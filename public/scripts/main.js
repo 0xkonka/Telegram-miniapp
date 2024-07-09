@@ -85,18 +85,19 @@ document.addEventListener("DOMContentLoaded", async() => {
   // === Open the TG App in big screen === //
   Telegram.WebApp.onEvent('init', function(){
     Telegram.WebApp.setHeaderColor('bg_color', '#101010');
+    Telegram.WebApp.expand();
   });
   // Initialize the Telegram Mini App
   Telegram.WebApp.ready();
 
-  Telegram.WebApp.onEvent('viewportChanged', function(height){
-      if (height == window.innerHeight) {
-          return;
-      }
-      Telegram.WebApp.expand();
-  });
-  // Immediately attempt to expand
-  Telegram.WebApp.expand();
+  // Telegram.WebApp.onEvent('viewportChanged', function(height){
+  //     if (height == window.innerHeight) {
+  //         return;
+  //     }
+  //     Telegram.WebApp.expand();
+  // });
+  // // Immediately attempt to expand
+  // Telegram.WebApp.expand();
 
   // ==== Register User === //
   const launchButton = document.getElementById("launch-app");
