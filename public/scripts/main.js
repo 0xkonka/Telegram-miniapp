@@ -100,6 +100,7 @@ document.addEventListener("DOMContentLoaded", async() => {
   const userIdParam = user.userid
   const usernameParam = user.username
   const referralIdParam = 0
+  await checkUserStatus(userIdParam)
 
   usernameInput.value = usernameParam;
 
