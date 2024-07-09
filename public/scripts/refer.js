@@ -105,13 +105,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Handle "Copy Link" button click
   document.getElementById("copy-link").addEventListener("click", () => {
-    const referralLink = `https://t.me/trenfinance_bot?startapp=${userId}`;
+    const referralLink = `https://t.me/trenfinance_bot?start=${userId}`;
     copyToClipboard(referralLink);
   });
 
   // Handle "Refer a Friend" button click
   document.getElementById("refer-friend").addEventListener("click", () => {
-    const referralLink = `https://t.me/trenfinance_bot?startapp=${userId}`;
+    const referralLink = `https://t.me/trenfinance_bot?start=${userId}`;
     const message =
       "\nTren Finance is a DeFi protocol launching soon, and they are inviting you to start farming points in their new mini game.\n\n";
     const comment =
