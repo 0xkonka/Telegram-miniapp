@@ -68,16 +68,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const launchButton = document.getElementById("launch-app");
   const usernameInput = document.getElementById("username");
 
-  // const urlParams = new URLSearchParams(window.location.search);
-  // Get individual parameters
-  // const userIdParam = urlParams.get("userId");
-  // const usernameParam = urlParams.get("username");
-  // const referralIdParam = urlParams.get("referralId");
+  const urlParams = new URLSearchParams(window.location.search);
+  
   const user = getUserInfo()
   const userIdParam = user.userId
   const usernameParam = user.username
-  const referralIdParam = 0
-
+  const referralIdParam = urlParams.get("referralId");
+  console.log('referralIdParam', referralIdParam)
+  
   usernameInput.value = usernameParam;
 
   launchButton.addEventListener("click", async (event) => {
