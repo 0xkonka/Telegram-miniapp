@@ -1,6 +1,6 @@
 import logging
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
-from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
+from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, CallbackContext, ContextTypes
 import os
 from dotenv import load_dotenv
 import requests
@@ -56,6 +56,13 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     await update.message.reply_text(description, reply_markup=reply_markup)
 
+
+def handle_webapp_data(update: Update, context: CallbackContext):
+    query = update.callback_query
+    data = query.data  # This will contain the JSON data sent from the mini app
+    context.bot.answerCallbackQuery(query.id, text=f"Received data: {data}")
+
+
 # async def learn(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 #     """Send a message when the command /learn is issued."""
@@ -85,6 +92,8 @@ def main() -> None:
     application = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
     application.add_handler(CommandHandler("start", start))
     # application.add_handler(CommandHandler("learn", learn))
+    data_handler = CallbackQueryHandler(handle_webapp_data)
+    application.add_handler(data_handler)
     application.run_polling()
 
 

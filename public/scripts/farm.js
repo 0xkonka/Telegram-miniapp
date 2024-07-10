@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     .getElementById("test-notification")
     .addEventListener("click", async () => {
       if (window.Telegram && Telegram.WebApp) {
-          Telegram.WebApp.sendData(farming-finished); // Sends data to the bot
+          Telegram.WebApp.sendData("farming-finished"); // Sends data to the bot
       } else {
           console.error('Telegram.WebApp not found');
       }
