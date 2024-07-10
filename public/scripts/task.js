@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   console.log('BE_URL', BE_URL);
 
   // Get userId from local storage
-  const userId = localStorage.getItem("userId") || "cym1020"; // Default to "cym1020" if not found
+  const userId = localStorage.getItem("userId")
 
   if (userId) {
     console.log("userId", userId);

@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const tg = window.Telegram.WebApp;
   tg.expand(); // Expand the app to the maximum available height
 
-  // Get userId from local storage
-  const userId = localStorage.getItem("userId") || "cym1020"; // Default to "cym1020" if not found
+  // Get userId from local storage or default to "cym1020"
+  const userId = localStorage.getItem("userId") || "cym1020";
 
   if (userId) {
     console.log("userId", userId);
@@ -36,7 +36,31 @@ document.addEventListener("DOMContentLoaded", async () => {
         const referralsList = document.getElementById("referrals-list");
         referralsList.innerHTML = ""; // Clear any existing referrals
 
-        userStatus.referrers.forEach(async (referrer) => {
+        const referralBonuses = [
+          { count: 5, points: 2500 },
+          { count: 10, points: 5000 },
+          { count: 25, points: 125000 },
+        ];
+
+        referralBonuses.forEach((bonus) => {
+          // if (userStatus.referrers.length >= bonus.count) {
+            const referrerElement = document.createElement("div");
+            referrerElement.className =
+              "w-full border border-[#393939] rounded-md p-3 flex justify-between items-center gap-3";
+            referrerElement.innerHTML = `
+              <div class="flex flex-col gap-1">
+                <p class="text-white font-semibold leading-tight">${bonus.count} referrals bonus</p>
+              </div>
+              <div class="flex gap-2 items-center">
+                <p class="font-britanica text-white text-2xl">${bonus.points}</p>
+                <p class="text-white">Points</p>
+              </div>
+            `;
+            referralsList.appendChild(referrerElement);
+          // }
+        });
+
+        const fetchReferrerStatus = async (referrer) => {
           try {
             const referrerStatusResponse = await fetch(
               `${BE_URL}/status/${referrer.referrerId}`,
@@ -50,10 +74,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             if (referrerStatusResponse.ok) {
               const referrerStatus = (await referrerStatusResponse.json()).data;
-              const totalPoints =
-                referrerStatus.farmingPoint + referrerStatus.referralPoint;
-              const timeSinceReferral =
-                Math.floor(new Date().getTime() / 1000) - referrer.timestamp;
+              // const totalPoints =
+              //   referrerStatus.farmingPoint + referrerStatus.referralPoint;
 
               const referrerElement = document.createElement("div");
               referrerElement.className =
@@ -63,7 +85,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                   <p class="text-white font-semibold leading-tight">${referrerStatus.userName}</p>
                 </div>
                 <div class="flex gap-2 items-center">
-                  <p class="font-britanica text-white text-2xl">${totalPoints}</p>
+                  <p class="font-britanica text-white text-2xl">2000</p>
                   <p class="text-white">Points</p>
                 </div>
               `;
@@ -77,7 +99,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           } catch (error) {
             console.error("Error:", error);
           }
-        });
+        };
+
+        userStatus.referrers.forEach(fetchReferrerStatus);
       } else {
         console.error(
           "Error getting user status:",
@@ -92,7 +116,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Function to copy text to clipboard
-  function copyToClipboard(text) {
+  const copyToClipboard = (text) => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
@@ -101,7 +125,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       .catch((err) => {
         console.error("Failed to copy text: ", err);
       });
-  }
+  };
 
   // Handle "Copy Link" button click
   document.getElementById("copy-link").addEventListener("click", () => {
