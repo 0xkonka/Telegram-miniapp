@@ -61,35 +61,35 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     await update.message.reply_text(description, reply_markup=reply_markup)
 
-async def learn(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+# async def learn(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
-    """Send a message when the command /learn is issued."""
+#     """Send a message when the command /learn is issued."""
     
-    description = f"Tren Finance is unlocking liquidity for the long tail of crypto.\nBorrow trenUSD. Leverage up to 30x using over 100+ tokens."
+#     description = f"Tren Finance is unlocking liquidity for the long tail of crypto.\nBorrow trenUSD. Leverage up to 30x using over 100+ tokens."
 
-    keyboard = [
-        [
-            InlineKeyboardButton("Testnet", url='https://testnet.tren.finance'),
-            InlineKeyboardButton("Website", url='https://tren.finance')
-        ],
-        [
-            InlineKeyboardButton("Docs", url='https://docs.tren.finance'),
-            InlineKeyboardButton("Twitter", url='https://x.com/TrenFinance'),
-        ],
-        [
-            InlineKeyboardButton("Discord", url='https://discord.com/invite/trenfinance'),
-            InlineKeyboardButton("Telegram", url='https://t.me/trenfinance'),
-        ],
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
+#     keyboard = [
+#         [
+#             InlineKeyboardButton("Testnet", url='https://testnet.tren.finance'),
+#             InlineKeyboardButton("Website", url='https://tren.finance')
+#         ],
+#         [
+#             InlineKeyboardButton("Docs", url='https://docs.tren.finance'),
+#             InlineKeyboardButton("Twitter", url='https://x.com/TrenFinance'),
+#         ],
+#         [
+#             InlineKeyboardButton("Discord", url='https://discord.com/invite/trenfinance'),
+#             InlineKeyboardButton("Telegram", url='https://t.me/trenfinance'),
+#         ],
+#     ]
+#     reply_markup = InlineKeyboardMarkup(keyboard)
 
-    await update.message.reply_text(description, reply_markup=reply_markup)
+#     await update.message.reply_text(description, reply_markup=reply_markup)
 
 def main() -> None:
     """Start the bot."""
     application = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
     application.add_handler(CommandHandler("start", start))
-    application.add_handler(CommandHandler("learn", learn))
+    # application.add_handler(CommandHandler("learn", learn))
     application.run_polling()
 
 
