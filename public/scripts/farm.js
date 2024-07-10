@@ -1,48 +1,48 @@
 // === Get Telegram userid and name in my web app without passing param.
-function getUserInfo () {
+function getUserInfo() {
   const tg = window.Telegram.WebApp;
   // Check if user data is available
   if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
-      const user = tg.initDataUnsafe.user;
-      // You now have access to the user data
-      return {
-          userid: user.id,
-          username: user.username,
-      }
-      // Do something with this data (e.g., send it to your server)
+    const user = tg.initDataUnsafe.user;
+    // You now have access to the user data
+    return {
+      userid: user.id,
+      username: user.username,
+    };
+    // Do something with this data (e.g., send it to your server)
   } else {
-      // Handle case where user data is not available
-      console.log('No user data available');
-      return {
-          userid: 0,
-          username: ''
-      }
+    // Handle case where user data is not available
+    console.log("No user data available");
+    return {
+      userid: 0,
+      username: "",
+    };
   }
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("Farm JS code here");
-  
+
   // === Open the TG App in big screen === //
-  Telegram.WebApp.onEvent('init', function(){
-    Telegram.WebApp.setHeaderColor('bg_color', '#101010');
+  Telegram.WebApp.onEvent("init", function () {
+    Telegram.WebApp.setHeaderColor("bg_color", "#101010");
   });
   // Initialize the Telegram Mini App
   Telegram.WebApp.ready();
 
-  Telegram.WebApp.onEvent('viewportChanged', function(height){
-      if (height == window.innerHeight) {
-          return;
-      }
-      Telegram.WebApp.expand();
+  Telegram.WebApp.onEvent("viewportChanged", function (height) {
+    if (height == window.innerHeight) {
+      return;
+    }
+    Telegram.WebApp.expand();
   });
   // Immediately attempt to expand
   Telegram.WebApp.expand();
   // ==================================== //
 
   // == If user navigated farm page directly (already registered user) == //
-  const user = getUserInfo()
-  const userIdParam = user.userid
+  const user = getUserInfo();
+  const userIdParam = user.userid;
   localStorage.setItem("userId", userIdParam);
   // ==================================== //
 
@@ -71,10 +71,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Display user status
         document.getElementById("farming-points").textContent =
-          (userStatus.farmingPoint + userStatus.referralPoint).toLocaleString('en-US', {
-            minimumFractionDigits: 6,
-            maximumFractionDigits: 6
-          }) || "0.000000";
+          (userStatus.farmingPoint + userStatus.referralPoint).toLocaleString(
+            "en-US",
+            {
+              minimumFractionDigits: 6,
+              maximumFractionDigits: 6,
+            }
+          ) || "0.000000";
         document.getElementById("referrers-count").textContent =
           userStatus.referrers.length || "0";
         document.getElementById("referral-points").textContent =
@@ -116,20 +119,22 @@ document.addEventListener("DOMContentLoaded", async () => {
       // Cap at 8 hours
       document.getElementById("farming-points").textContent = (
         userStatus.farmingPoint +
+        userStatus.referralPoint +
         25 * 8
-      ).toLocaleString('en-US', {
+      ).toLocaleString("en-US", {
         minimumFractionDigits: 6,
-        maximumFractionDigits: 6
+        maximumFractionDigits: 6,
       });
     } else {
       const additionalPoints = 25 / 3600;
       userStatus.farmingPoint = userStatus.farmingPoint + additionalPoints;
       document.getElementById("farming-points").textContent = (
         (25 / 3600) * elapsedTime +
-        userStatus.farmingPoint
-      ).toLocaleString('en-US', {
-          minimumFractionDigits: 6,
-          maximumFractionDigits: 6
+        userStatus.farmingPoint +
+        userStatus.referralPoint
+      ).toLocaleString("en-US", {
+        minimumFractionDigits: 6,
+        maximumFractionDigits: 6,
       });
     }
   }
