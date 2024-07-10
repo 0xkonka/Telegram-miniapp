@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Display referral points
         document.getElementById("referral-points").textContent =
-          userStatus.referralPoint || "0";
+          userStatus.referralPoint.toLocaleString() || "0";
 
         // Display referrals
         const referralsList = document.getElementById("referrals-list");
