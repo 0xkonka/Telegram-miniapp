@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                   <p class="text-white font-semibold leading-tight">${referrerStatus.userName}</p>
                 </div>
                 <div class="flex gap-2 items-center">
-                  <p class="font-britanica text-white text-2xl">2000</p>
+                  <p class="font-britanica text-white text-2xl">2,000</p>
                   <p class="text-white">Points</p>
                 </div>
               `;
