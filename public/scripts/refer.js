@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <p class="text-white font-semibold leading-tight">${bonus.count} referrals bonus</p>
               </div>
               <div class="flex gap-2 items-center">
-                <p class="font-britanica text-white text-2xl">${bonus.points}</p>
+                <p class="font-britanica text-white text-2xl">${bonus.points.toLocaleString()}</p>
                 <p class="text-white">Points</p>
               </div>
             `;
