@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Display user status
         document.getElementById("farming-points").textContent =
-          userStatus.farmingPoint.toLocaleString('en-US', {
+          (userStatus.farmingPoint + userStatus.referralPoint).toLocaleString('en-US', {
             minimumFractionDigits: 6,
             maximumFractionDigits: 6
           }) || "0.000000";
