@@ -27,16 +27,11 @@ def fetch_user_status(user_id):
     return response.json()
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    # start_param = context.args[0] if context.args else None
-    # if start_param:
-    #     update.message.reply_text(f'User invited with parameter: {start_param}')
-    # else:
-    #     update.message.reply_text('Hello!')
     args = context.args
     referralId = ''
     if args:
         referralId = args[0]
-        await update.message.reply_text('Hello!')
+        # await update.message.reply_text('Hello!')
 
     """Send a message when the command /start is issued."""
     # logger.info("Referral ID: %s", referral_id)
