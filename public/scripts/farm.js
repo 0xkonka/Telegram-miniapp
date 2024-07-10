@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("referrers-count").textContent =
           userStatus.referrers.length || "0";
         document.getElementById("referral-points").textContent =
-          userStatus.referralPoint || "0";
+          userStatus.referralPoint.toLocaleString() || "0";
 
         // Calculate and display remaining time
         if (userStatus.farmStartingTime == 0) {
