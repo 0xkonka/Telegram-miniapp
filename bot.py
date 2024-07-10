@@ -51,34 +51,45 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         TASK_WEB_APP_URL_EXTENDED = f'https://telegram-mini-app-kappa.vercel.app/?referralId={referralId}'
 
     # Description and banner (placeholder)
-    description = f"Hey there, {user_name}!\nWelcome To Tren Finance!\n\n👋🏻 Farm Tren Points before the launch of Mainnet to get a head start. \n👯 Got friends? Invite them! Spread the fun and multiply your points together. \n\nThat’s all you need to know to get started. ⬇️"
+    description = f"Welcome to Tren Finance!\n\nStart farming points as an early adopter.\n\nFor every friend you refer, you both get 2,000 bonus points.\n\nHit the button below to start the app."
 
     # Main menu buttons
     keyboard = [
-        [InlineKeyboardButton("💰 Open App", web_app=WebAppInfo(url=TASK_WEB_APP_URL_EXTENDED))],
-        [
-            InlineKeyboardButton("Join Chat", url='https://t.me/trenfinance'),
-            InlineKeyboardButton("Discord", url='https://discord.com/invite/trenfinance')
-        ],
-        [
-            InlineKeyboardButton("Twitter", url='https://twitter.com/TrenFinance'),
-            InlineKeyboardButton("Linkedin", url='https://www.linkedin.com/company/tren-finance/'),
-        ],
-        [
-            InlineKeyboardButton("News", url='https://blog.tren.finance/'),
-            InlineKeyboardButton("Learn More", url='https://docs.tren.finance/'),
-        ],
-        [InlineKeyboardButton("📨 Invite Friends", switch_inline_query="Check out TREN App! Complete social tasks, earn, and have a blast! 🚀 [Join now] (https://t.me/trenfinance_bot)")],
+        [InlineKeyboardButton("→ Launch App", web_app=WebAppInfo(url=TASK_WEB_APP_URL_EXTENDED))],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     await update.message.reply_text(description, reply_markup=reply_markup)
 
+async def learn(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+
+    """Send a message when the command /learn is issued."""
+    
+    description = f"Tren Finance is unlocking liquidity for the long tail of crypto.\nBorrow trenUSD. Leverage up to 30x using over 100+ tokens."
+
+    keyboard = [
+        [
+            InlineKeyboardButton("Testnet", url='https://testnet.tren.finance'),
+            InlineKeyboardButton("Website", url='https://tren.finance')
+        ],
+        [
+            InlineKeyboardButton("Docs", url='https://docs.tren.finance'),
+            InlineKeyboardButton("Twitter", url='https://x.com/TrenFinance'),
+        ],
+        [
+            InlineKeyboardButton("Discord", url='https://discord.com/invite/trenfinance'),
+            InlineKeyboardButton("Telegram", url='https://t.me/trenfinance'),
+        ],
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    await update.message.reply_text(description, reply_markup=reply_markup)
 
 def main() -> None:
     """Start the bot."""
     application = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
     application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("learn", learn))
     application.run_polling()
 
 
