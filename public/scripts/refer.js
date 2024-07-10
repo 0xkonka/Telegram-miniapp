@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Display referral points
         document.getElementById("referral-points").textContent =
-          userStatus.referralPoint || "0";
+          userStatus.referralPoint.toLocaleString() || "0";
 
         // Display referrals
         const referralsList = document.getElementById("referrals-list");
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                   <p class="text-white font-semibold leading-tight">${referrerStatus.userName}</p>
                 </div>
                 <div class="flex gap-2 items-center">
-                  <p class="font-britanica text-white text-2xl">${totalPoints}</p>
+                  <p class="font-britanica text-white text-2xl">${totalPoints.toLocaleString() || "0"}</p>
                   <p class="text-white">Points</p>
                 </div>
               `;
