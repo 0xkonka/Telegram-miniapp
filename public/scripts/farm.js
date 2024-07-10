@@ -74,10 +74,10 @@ document.addEventListener("DOMContentLoaded", async () => {
           (userStatus.farmingPoint + userStatus.referralPoint).toLocaleString(
             "en-US",
             {
-              minimumFractionDigits: 6,
-              maximumFractionDigits: 6,
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
             }
-          ) || "0.000000";
+          ) || "0.00";
         document.getElementById("referrers-count").textContent =
           userStatus.referrers.length || "0";
         document.getElementById("referral-points").textContent =
@@ -122,8 +122,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         userStatus.referralPoint +
         25 * 8
       ).toLocaleString("en-US", {
-        minimumFractionDigits: 6,
-        maximumFractionDigits: 6,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
       });
     } else {
       const additionalPoints = 25 / 3600;
@@ -133,8 +133,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         userStatus.farmingPoint +
         userStatus.referralPoint
       ).toLocaleString("en-US", {
-        minimumFractionDigits: 6,
-        maximumFractionDigits: 6,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
       });
     }
   }
