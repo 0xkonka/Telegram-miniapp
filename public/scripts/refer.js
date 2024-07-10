@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         ];
 
         referralBonuses.forEach((bonus) => {
-          // if (userStatus.referrers.length >= bonus.count) {
+          if (userStatus.referrers.length >= bonus.count) {
             const referrerElement = document.createElement("div");
             referrerElement.className =
               "w-full border border-[#393939] rounded-md p-3 flex justify-between items-center gap-3";
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               </div>
             `;
             referralsList.appendChild(referrerElement);
-          // }
+          }
         });
 
         const fetchReferrerStatus = async (referrer) => {
