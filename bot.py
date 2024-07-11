@@ -5,7 +5,7 @@ import os
 from dotenv import load_dotenv
 import requests
 from flask import Flask, request, jsonify
-from flask_cors import CORS 
+from flask_cors import CORS, cross_origin
 import asyncio
 
 app = Flask(__name__)
@@ -34,9 +34,31 @@ def fetch_user_status(user_id):
     response = requests.get(url, headers=headers)
     return response.json()
 
+
 @app.route('/get-test', methods=['GET'])
 def getTest():
     return "abcde"
+
+@app.route('/referral-success', methods=['POST'])
+async def referral_success():
+    data = request.get_json()
+    reference_id = data.get("reference_id", 0)
+    if reference_id == 0:
+        return jsonify({"status": "fail"}), 400
+    
+    user_chat_id = reference_id
+    message_text = "You’ve earned 2,000 points through a successful referral.\n\nYour friend has also received 2,000 points. Keep up the good work!"
+
+    # Constructing the inline keyboard markup
+    TASK_WEB_APP_URL_EXTENDED = 'https://telegram-mini-app-kappa.vercel.app/refer.html'
+    keyboard = [
+        [InlineKeyboardButton("→ Refer more friends", web_app=WebAppInfo(url=TASK_WEB_APP_URL_EXTENDED))],
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    # Sending message with inline keyboard
+    await application.bot.send_message(chat_id=user_chat_id, text=message_text, reply_markup=reply_markup)
+    return jsonify({"status": "success"}), 200
 
 @app.route('/sendData', methods=['POST'])
 async def receive_data():
@@ -45,10 +67,11 @@ async def receive_data():
     message_text = data.get("message", "Hey, You received test notification from TG Mini App")
     
     # Send the message asynchronously using the global application instance
-    async with application:
-        user_chat_id = 5040516536  # Assuming user_id is the chat ID where we want to send the message
-        await application.bot.send_message(chat_id=user_chat_id, text=message_text)
+    user_chat_id = 5040516536  # Assuming user_id is the chat ID where we want to send the message
+    await application.bot.send_message(chat_id=user_chat_id, text=message_text)
     return jsonify({"status": "success"}), 200
+
+    # return "success"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     args = context.args

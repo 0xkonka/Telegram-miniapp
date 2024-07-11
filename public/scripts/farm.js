@@ -204,20 +204,4 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Error:", error);
       }
     });
-
-    document
-      .getElementById("test-notification")
-      .addEventListener("click", () => {
-        const data = { message: "Hello from Mini App" };
-            fetch('http://159.203.145.76/sendData', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => console.log('Success:', data))
-            .catch((error) => console.error('Error:', error));
-      })
 });

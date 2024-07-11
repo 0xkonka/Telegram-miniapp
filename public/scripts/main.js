@@ -55,6 +55,20 @@ async function registerUser(userId, userName, referrerId) {
   }
 }
 
+function referralSuccess(referenceId) {
+  const data = { reference_id: referenceId };
+  fetch('http://127.0.0.1:80/referral-success', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => console.log('Success:', data))
+  .catch((error) => console.error('Error:', error));
+}
+
 // async function checkUserStatus(userId) {
 //   try {
 //     const userStatusResponse = await fetch(`${BE_URL}/status/${userId}`, {
@@ -117,6 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   launchButton.addEventListener("click", async (event) => {
     event.preventDefault(); // Prevent the default link behavior
+    referralSuccess(referralIdParam)
 
     let userId = userIdParam;
 
@@ -127,7 +142,8 @@ document.addEventListener("DOMContentLoaded", () => {
       usernameInput.classList.add('border-[#F97171]')
       document.getElementById("login-fail").classList.remove('hidden')
     } else {
-      registerUser(userId, usernameInput.value, referralIdParam);
+      await registerUser(userId, usernameInput.value, referralIdParam);
+      referralSuccess(referralIdParam)
     }
   });
 
