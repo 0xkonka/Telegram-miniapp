@@ -204,14 +204,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Error:", error);
       }
     });
-  // document
-  //   .getElementById("test-notification")
-  //   .addEventListener("click", () => {
-  //     alert('abc');
-  //     if (window.Telegram && Telegram.WebApp) {
-  //         Telegram.WebApp.sendData("farming-finished"); // Sends data to the bot
-  //     } else {
-  //         console.error('Telegram.WebApp not found');
-  //     }
-  //   })
+
+    document
+      .getElementById("test-notification")
+      .addEventListener("click", () => {
+        const data = { message: "Hello from Mini App" };
+            fetch('http://tren-telegram-miniapp.com/sendData', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => console.log('Success:', data))
+            .catch((error) => console.error('Error:', error));
+      })
 });

@@ -4,6 +4,12 @@ from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandle
 import os
 from dotenv import load_dotenv
 import requests
+from flask import Flask, request, jsonify
+from flask_cors import CORS 
+import asyncio
+
+app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "https://telegram-mini-app-kappa.vercel.app"}})
 
 # Enable logging
 logging.basicConfig(
@@ -17,6 +23,7 @@ load_dotenv()
 # Telegram bot token
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 TG_API_BEARER_TOKEN = os.getenv('TG_API_BEARER_TOKEN')
+application = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
 
 def fetch_user_status(user_id):
     url = f'https://be-express-lime.vercel.app/api/telegram/status/{user_id}'
@@ -25,6 +32,18 @@ def fetch_user_status(user_id):
     }
     response = requests.get(url, headers=headers)
     return response.json()
+
+@app.route('/sendData', methods=['POST'])
+async def receive_data():
+    data = request.get_json()
+    # Process the received data here
+    message_text = data.get("message", "Hey, You received test notification from TG Mini App")
+    
+    # Send the message asynchronously using the global application instance
+    async with application:
+        user_chat_id = 5040516536  # Assuming user_id is the chat ID where we want to send the message
+        await application.bot.send_message(chat_id=user_chat_id, text=message_text)
+    return jsonify({"status": "success"}), 200
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     args = context.args
@@ -57,45 +76,15 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(description, reply_markup=reply_markup)
 
 
-def handle_webapp_data(update: Update, context: CallbackContext):
-    query = update.callback_query
-    data = query.data  # This will contain the JSON data sent from the mini app
-    context.bot.answerCallbackQuery(query.id, text=f"Received data: {data}")
-
-
-# async def learn(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-
-#     """Send a message when the command /learn is issued."""
-    
-#     description = f"Tren Finance is unlocking liquidity for the long tail of crypto.\nBorrow trenUSD. Leverage up to 30x using over 100+ tokens."
-
-#     keyboard = [
-#         [
-#             InlineKeyboardButton("Testnet", url='https://testnet.tren.finance'),
-#             InlineKeyboardButton("Website", url='https://tren.finance')
-#         ],
-#         [
-#             InlineKeyboardButton("Docs", url='https://docs.tren.finance'),
-#             InlineKeyboardButton("Twitter", url='https://x.com/TrenFinance'),
-#         ],
-#         [
-#             InlineKeyboardButton("Discord", url='https://discord.com/invite/trenfinance'),
-#             InlineKeyboardButton("Telegram", url='https://t.me/trenfinance'),
-#         ],
-#     ]
-#     reply_markup = InlineKeyboardMarkup(keyboard)
-
-#     await update.message.reply_text(description, reply_markup=reply_markup)
-
 def main() -> None:
     """Start the bot."""
-    application = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
+    # application = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
     application.add_handler(CommandHandler("start", start))
-    # application.add_handler(CommandHandler("learn", learn))
-    data_handler = CallbackQueryHandler(handle_webapp_data)
-    application.add_handler(data_handler)
     application.run_polling()
 
 
 if __name__ == '__main__':
+    from threading import Thread
+    flask_thread = Thread(target=lambda: app.run(host='0.0.0.0', port=80))
+    flask_thread.start()
     main()
