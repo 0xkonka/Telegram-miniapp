@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       .getElementById("test-notification")
       .addEventListener("click", () => {
         const data = { message: "Hello from Mini App" };
-            fetch('https://tren-telegram-miniapp.com:80/sendData', {
+            fetch('http://159.203.145.76/sendData', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
