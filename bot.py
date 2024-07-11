@@ -9,7 +9,8 @@ from flask_cors import CORS
 import asyncio
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "https://telegram-mini-app-kappa.vercel.app"}})
+# CORS(app, resources={r"/*": {"origins": "https://telegram-mini-app-kappa.vercel.app"}})
+CORS(app)
 
 # Enable logging
 logging.basicConfig(
@@ -32,6 +33,10 @@ def fetch_user_status(user_id):
     }
     response = requests.get(url, headers=headers)
     return response.json()
+
+@app.route('/get-test', methods=['GET'])
+def getTest():
+    return "abcde"
 
 @app.route('/sendData', methods=['POST'])
 async def receive_data():
