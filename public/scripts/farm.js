@@ -20,6 +20,21 @@ function getUserInfo() {
   }
 }
 
+// Completed Farming to send notification
+function completedFarming() {
+  const data = {};
+  fetch('http://127.0.0.1:80/completed-farming', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => console.log('Success:', data))
+  .catch((error) => console.error('Error:', error));
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("Farm JS code here");
 
@@ -39,7 +54,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Immediately attempt to expand
   Telegram.WebApp.expand();
   // ==================================== //
-
   // == If user navigated farm page directly (already registered user) == //
   const user = getUserInfo();
   const userIdParam = user.userid;
@@ -152,6 +166,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       ).textContent = `${hours}h : ${minutes}m : ${seconds}s`;
       disableFarmingButton();
     } else {
+      completedFarming();
       document.getElementById("remaining-time").textContent = "0h : 0m : 0s";
       enableFarmingButton();
     }
