@@ -158,6 +158,6 @@ def main() -> None:
 
 if __name__ == '__main__':
     from threading import Thread
-    flask_thread = Thread(target=lambda: app.run(host='0.0.0.0', port=80))
+    flask_thread = Thread(target=lambda: app.run(host='0.0.0.0', port=5000))
     flask_thread.start()
     asyncio.run(main())
