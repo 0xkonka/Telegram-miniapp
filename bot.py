@@ -24,7 +24,10 @@ load_dotenv()
 # Telegram bot token
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 TG_API_BEARER_TOKEN = os.getenv('TG_API_BEARER_TOKEN')
+# Ceate bot instance
 application = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
+# Global User Id
+gUserId = 0
 
 def fetch_user_status(user_id):
     url = f'https://be-express-lime.vercel.app/api/telegram/status/{user_id}'
@@ -50,22 +53,66 @@ async def referral_success():
     message_text = "You’ve earned 2,000 points through a successful referral.\n\nYour friend has also received 2,000 points. Keep up the good work!"
 
     # Constructing the inline keyboard markup
-    TASK_WEB_APP_URL_EXTENDED = 'https://telegram-mini-app-kappa.vercel.app/refer.html'
+    TASK_WEB_APP_URL_REFER = 'https://telegram-mini-app-kappa.vercel.app/refer.html'
     keyboard = [
-        [InlineKeyboardButton("→ Refer more friends", web_app=WebAppInfo(url=TASK_WEB_APP_URL_EXTENDED))],
+        [InlineKeyboardButton("→ Refer more friends", web_app=WebAppInfo(url=TASK_WEB_APP_URL_REFER))],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     # Sending message with inline keyboard
     await application.bot.send_message(chat_id=user_chat_id, text=message_text, reply_markup=reply_markup)
+    await asyncio.sleep(5)
     return jsonify({"status": "success"}), 200
+
+
+@app.route('/referral-bonus', methods=['POST'])
+async def referral_bonus():
+    data = request.get_json()
+    reference_id = data.get("reference_id", 0)
+    message = data.get("message", "Congrats Bonus")
+    if reference_id == 0:
+        return jsonify({"status": "fail"}), 400
+    
+    user_chat_id = reference_id
+    message_text = message
+
+    # Constructing the inline keyboard markup
+    TASK_WEB_APP_URL_REFER = 'https://telegram-mini-app-kappa.vercel.app/refer.html'
+    keyboard = [
+        [InlineKeyboardButton("→ Refer more friends", web_app=WebAppInfo(url=TASK_WEB_APP_URL_REFER))],
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    # Sending message with inline keyboard
+    await application.bot.send_message(chat_id=user_chat_id, text=message_text, reply_markup=reply_markup)
+    await asyncio.sleep(5)
+    return jsonify({"status": "success"}), 200
+
+
+@app.route('/completed-farming', methods=['POST'])
+async def completedFarming():
+    message_text = "Congrats!\n\nYou’ve earned 200 points by farming. Head to the app to claim."
+
+    # Constructing the inline keyboard markup
+    TASK_WEB_APP_URL_FARM = 'https://telegram-mini-app-kappa.vercel.app/farm.html'
+    keyboard = [
+        [InlineKeyboardButton("→ Claim tokens", web_app=WebAppInfo(url=TASK_WEB_APP_URL_FARM))],
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    # Sending message with inline keyboard
+    global gUserId
+    await application.bot.send_message(chat_id=gUserId , text=message_text, reply_markup=reply_markup)
+    await asyncio.sleep(5)
+    return jsonify({"status": "success"}), 200
+
 
 @app.route('/sendData', methods=['POST'])
 async def receive_data():
     data = request.get_json()
     # Process the received data here
     message_text = data.get("message", "Hey, You received test notification from TG Mini App")
-    
+
     # Send the message asynchronously using the global application instance
     user_chat_id = 5040516536  # Assuming user_id is the chat ID where we want to send the message
     await application.bot.send_message(chat_id=user_chat_id, text=message_text)
@@ -78,12 +125,10 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     referralId = ''
     if args:
         referralId = args[0]
-        # await update.message.reply_text('Hello!')
-
-    """Send a message when the command /start is issued."""
-    # logger.info("Referral ID: %s", referral_id)
     user = update.message.from_user
-    user_name = user.username
+    global gUserId
+    gUserId = user.id
+    """Send a message when the command /start is issued."""
     
     # Call the external API to get user status
     status_response = fetch_user_status(user.id)
@@ -115,4 +160,4 @@ if __name__ == '__main__':
     from threading import Thread
     flask_thread = Thread(target=lambda: app.run(host='0.0.0.0', port=80))
     flask_thread.start()
-    main()
+    asyncio.run(main())

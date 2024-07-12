@@ -5,11 +5,6 @@ const TG_TOKEN = window.config.TG_TOKEN;
 // === Get Telegram userid and name in my web app without passing param.
 function getUserInfo () {
   const tg = window.Telegram.WebApp;
-  // console.log('tg', tg)
-  // const initData = Telegram.WebApp.initData || window.location.search;
-  // console.log('initData', initData)
-  // alert(tg.initDataUnsafe.start_param)
-  // Check if user data is available
   if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
       const user = tg.initDataUnsafe.user;
       // You now have access to the user data
@@ -69,33 +64,20 @@ function referralSuccess(referenceId) {
   .catch((error) => console.error('Error:', error));
 }
 
-// async function checkUserStatus(userId) {
-//   try {
-//     const userStatusResponse = await fetch(`${BE_URL}/status/${userId}`, {
-//       method: "GET",
-//       headers: {
-//         Authorization: `Bearer ${TG_TOKEN}`,
-//       },
-//     });
+function referralBonus(referenceId, message) {
+  const data = { reference_id: referenceId, message: message};
+  fetch('http://127.0.0.1:80/referral-bonus', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => console.log('Success:', data))
+  .catch((error) => console.error('Error:', error));
+}
 
-//     if (userStatusResponse.ok) {
-//       userExist = (await userStatusResponse.json()).result;
-//       if(userExist == true) {
-//         localStorage.setItem("userId", userId);
-//         // Redirect or perform any additional actions here
-//         window.location.href = `./farm.html`;
-//       }
-//       // }
-//     } else {
-//       console.error(
-//         "Error getting user status:",
-//         userStatusResponse.statusText
-//       );
-//     }
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// }
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("JS code here", BE_URL);
@@ -131,8 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   launchButton.addEventListener("click", async (event) => {
     event.preventDefault(); // Prevent the default link behavior
-    referralSuccess(referralIdParam)
-
     let userId = userIdParam;
 
     if (!userId) userId = Math.round(Math.random() * 1000000);
@@ -143,6 +123,46 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("login-fail").classList.remove('hidden')
     } else {
       await registerUser(userId, usernameInput.value, referralIdParam);
+      if(referralIdParam) { //Check the referral if he invited more than 5, 10, 25 friends.
+        try {
+          const referrerStatusResponse = await fetch(
+            `${BE_URL}/status/${referralIdParam}`,
+            {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${TG_TOKEN}`,
+              },
+            }
+          );
+
+          if (referrerStatusResponse.ok) {
+            const referrerStatus = (await referrerStatusResponse.json()).data;
+            const referralCounts = referrerStatus?.referrers.length
+            let bounsPoints, referralCountLimit
+            if(referralCounts + 1 >= 25) {
+              bounsPoints = 12500
+              referralCountLimit = 25
+            } else if(referralCounts + 1 >= 10) {
+              bounsPoints = 5000
+              referralCountLimit = 10
+            } else if(referralCounts + 1 >= 5) {
+              bounsPoints = 2500
+              referralCountLimit = 5
+            }
+            const message = `You’ve got a ${bounsPoints.toLocaleString()} points bonus by successfully referring ${referralCountLimit} people. Keep up the good work!`
+
+            referralBonus(referralIdParam, message)
+          } else {
+            console.error(
+              "Error getting referrer status:",
+              referrerStatusResponse.statusText
+            );
+          }
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+      // If the referral succeed, give bonus 2000.
       referralSuccess(referralIdParam)
     }
   });
