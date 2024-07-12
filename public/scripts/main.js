@@ -52,7 +52,7 @@ async function registerUser(userId, userName, referrerId) {
 
 function referralSuccess(referenceId) {
   const data = { reference_id: referenceId };
-  fetch('http://telegram.tren.finance:80/referral-success', {     // Make it Https
+  fetch('https://telegram.tren.finance:80/referral-success', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let userId = userIdParam;
 
     if (!userId) userId = Math.round(Math.random() * 1000000);
-    referralSuccess(referralIdParam)                                  //delete
+
     if(usernameInput.value !== usernameParam) {
       usernameInput.classList.remove('border-[#787978]')
       usernameInput.classList.add('border-[#F97171]')
