@@ -23,7 +23,7 @@ function getUserInfo() {
 // Completed Farming to send notification
 function completedFarming() {
   const data = {};
-  fetch('http://127.0.0.1:80/completed-farming', {
+  fetch('https://telegram.tren.finance:80/completed-farming', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
