@@ -35,9 +35,19 @@ function completedFarming() {
   .catch((error) => console.error('Error:', error));
 }
 
+function checkHeight() {
+  var rootHeight = window.innerHeight
+  if(rootHeight < 750) {
+      document.body.classList.add('scale-sm')
+  } else {
+      document.body.classList.remove('scale-sm')
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("Farm JS code here");
 
+  checkHeight()
   // === Open the TG App in big screen === //
   Telegram.WebApp.onEvent("init", function () {
     Telegram.WebApp.setHeaderColor("bg_color", "#101010");

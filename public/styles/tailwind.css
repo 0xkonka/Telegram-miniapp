@@ -21,3 +21,9 @@ body {
 .app-bg {
     background: linear-gradient(180deg, #101010 7.54%, #000 43.4%);
 }
+
+
+.scale-sm .footer img{
+    width: 20px !important;
+    height: 20px !important;
+}
