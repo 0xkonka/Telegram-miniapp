@@ -20,11 +20,11 @@
 }
 
 .scale-sm .video-container {
-    height: 220px !important;
+    height: 200px !important;
 }
 
 .scale-sm .video-container video {
-    top: -220px !important;
+    top: -240px !important;
 }
 
 .scale-sm .card img{
