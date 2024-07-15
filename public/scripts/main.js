@@ -104,10 +104,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   
   const user = getUserInfo()
-  // const userIdParam = user.userid
-  // const usernameParam = user.username
-  const userIdParam = 123456789
-  const usernameParam = "abcde"
+  const userIdParam = user.userid
+  const usernameParam = user.username
+  // const userIdParam = 123456789
+  // const usernameParam = "abcde"
   const referralIdParam = urlParams.get("referralId");
   
   usernameInput.value = usernameParam;
@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
       await referralSuccess(referralIdParam)
 
       // Redirect or perform any additional actions here
-      // window.location.href = `./farm.html`;
+      window.location.href = `./farm.html`;
     }
   });
 
