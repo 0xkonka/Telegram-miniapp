@@ -27,3 +27,8 @@ body {
     width: 20px !important;
     height: 20px !important;
 }
+
+.scale-sm .footer p {
+    font-size: 13px !important;
+    line-height: 19.5px !important;
+}
