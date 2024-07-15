@@ -124,6 +124,8 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("login-fail").classList.remove('hidden')
     } else {
       await registerUser(userId, usernameInput.value, referralIdParam);
+
+      /*
       if(referralIdParam) { //Check the referral if he invited more than 5, 10, 25 friends.
         try {
           const referrerStatusResponse = await fetch(
@@ -165,6 +167,8 @@ document.addEventListener("DOMContentLoaded", () => {
           console.error("Error:", error);
         }
       }
+      */
+      
       // If the referral succeed, give bonus 2000.
       console.log("You are receiving bonus now")
       await referralSuccess(referralIdParam)
