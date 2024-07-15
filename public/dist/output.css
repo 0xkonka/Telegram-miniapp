@@ -1087,3 +1087,7 @@ body {
   font-size: 13px !important;
   line-height: 19.5px !important;
 }
+
+.footer {
+  background: #000;
+}
