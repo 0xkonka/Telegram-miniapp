@@ -51,7 +51,7 @@ async function registerUser(userId, userName, referrerId) {
 
 function referralSuccess(referenceId) {
   const data = { reference_id: referenceId };
-  fetch('https://telegram.tren.finance:80/referral-success', {
+  fetch('https://telegram.tren.finance/referral-success', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
@@ -65,7 +65,7 @@ function referralSuccess(referenceId) {
 
 function referralBonus(referenceId, message) {
   const data = { reference_id: referenceId, message: message};
-  fetch('https://telegram.tren.finance:80/referral-bonus', {
+  fetch('https://telegram.tren.finance/referral-bonus', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
