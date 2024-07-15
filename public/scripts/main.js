@@ -105,8 +105,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   
   const user = getUserInfo()
-  const userIdParam = user.userid
-  const usernameParam = user.username
+  // const userIdParam = user.userid
+  // const usernameParam = user.username
+  const userIdParam = 123456
+  const usernameParam = "abcd"
   const referralIdParam = urlParams.get("referralId");
   
   usernameInput.value = usernameParam;
@@ -138,6 +140,8 @@ document.addEventListener("DOMContentLoaded", () => {
           if (referrerStatusResponse.ok) {
             const referrerStatus = (await referrerStatusResponse.json()).data;
             const referralCounts = referrerStatus?.referrers.length
+            console.log('referralCounts: ', referralCounts)
+
             let bounsPoints, referralCountLimit
             if(referralCounts + 1 >= 25) {
               bounsPoints = 12500
@@ -163,6 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
       // If the referral succeed, give bonus 2000.
+      console.log("You are receiving bonus now")
       referralSuccess(referralIdParam)
     }
   });
