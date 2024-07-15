@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
       await referralSuccess(referralIdParam)
 
       // Redirect or perform any additional actions here
-      window.location.href = `./farm.html`;
+      // window.location.href = `./farm.html`;
     }
   });
 
