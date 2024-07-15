@@ -49,9 +49,9 @@ async function registerUser(userId, userName, referrerId) {
   }
 }
 
-function referralSuccess(referenceId) {
+async function referralSuccess(referenceId) {
   const data = { reference_id: referenceId };
-  fetch('https://telegram.tren.finance/referral-success', {
+  await fetch('https://telegram.tren.finance/referral-success', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
@@ -63,9 +63,9 @@ function referralSuccess(referenceId) {
   .catch((error) => console.error('Error:', error));
 }
 
-function referralBonus(referenceId, message) {
+async function referralBonus(referenceId, message) {
   const data = { reference_id: referenceId, message: message};
-  fetch('https://telegram.tren.finance/referral-bonus', {
+  await fetch('https://telegram.tren.finance/referral-bonus', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             const message = `You’ve got a ${bounsPoints.toLocaleString()} points bonus by successfully referring ${referralCountLimit} people. Keep up the good work!`
 
-            referralBonus(referralIdParam, message)
+            await referralBonus(referralIdParam, message)
           } else {
             console.error(
               "Error getting referrer status:",
@@ -165,10 +165,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       // If the referral succeed, give bonus 2000.
       console.log("You are receiving bonus now")
-      referralSuccess(referralIdParam)
+      await referralSuccess(referralIdParam)
 
       // Redirect or perform any additional actions here
-      // window.location.href = `./farm.html`;
+      window.location.href = `./farm.html`;
     }
   });
 
