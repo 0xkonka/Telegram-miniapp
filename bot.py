@@ -64,9 +64,9 @@ async def referral_success():
         await application.bot.send_message(chat_id=user_chat_id, text=message_text, reply_markup=reply_markup)
         await asyncio.sleep(5)
         return jsonify({"status": "success"}), 200
-    except requests.RequestException as e:
+    except Exception as e:
         logger.error(f"Error fetching user status: {e}")
-        return {"result": False}
+        return jsonify({"status": "success"}), 500
 
 
 @app.route('/referral-bonus', methods=['POST'])
