@@ -51,7 +51,7 @@ async function registerUser(userId, userName, referrerId) {
 
 function referralSuccess(referenceId) {
   const data = { reference_id: referenceId };
-  fetch('https://telegram.tren.finance/referral-success', {
+  fetch('https://telegram.tren.finance:80/referral-success', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
@@ -65,7 +65,7 @@ function referralSuccess(referenceId) {
 
 function referralBonus(referenceId, message) {
   const data = { reference_id: referenceId, message: message};
-  fetch('https://telegram.tren.finance/referral-bonus', {
+  fetch('https://telegram.tren.finance:80/referral-bonus', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
@@ -109,6 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const userIdParam = 123456
   const usernameParam = "abcd"
   const referralIdParam = urlParams.get("referralId");
+  
   usernameInput.value = usernameParam;
 
   launchButton.addEventListener("click", async (event) => {
@@ -169,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
       referralSuccess(referralIdParam)
 
       // Redirect or perform any additional actions here
-      // window.location.href = `./farm.html`;
+      window.location.href = `./farm.html`;
     }
   });
 
