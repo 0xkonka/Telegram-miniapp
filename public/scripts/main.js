@@ -40,8 +40,7 @@ async function registerUser(userId, userName, referrerId) {
       // Store userId in local storage
       localStorage.setItem("userId", userId);
 
-      // Redirect or perform any additional actions here
-      window.location.href = `./farm.html`;
+      
     } else {
       console.error("Error:", await response.json());
     }
@@ -169,6 +168,9 @@ document.addEventListener("DOMContentLoaded", () => {
       // If the referral succeed, give bonus 2000.
       console.log("You are receiving bonus now")
       referralSuccess(referralIdParam)
+
+      // Redirect or perform any additional actions here
+      window.location.href = `./farm.html`;
     }
   });
 
