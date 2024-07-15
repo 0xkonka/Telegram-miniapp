@@ -1,9 +1,11 @@
 function checkHeight() {
   var rootHeight = window.innerHeight
   if(rootHeight < 750) {
-      document.body.classList.add('scale-sm')
+    document.body.classList.remove('hidden')
+    document.body.classList.add('scale-sm')
   } else {
-      document.body.classList.remove('scale-sm')
+    document.body.classList.remove('hidden')
+    document.body.classList.remove('scale-sm')
   }
 }
 
