@@ -1,0 +1,51 @@
+.scale-sm .app-root {
+    padding-top: 28px !important;
+}
+
+.scale-sm .title {
+    font-size: 24px !important;
+    margin-bottom: 12px !important;
+}
+
+.scale-sm .description {
+    font-size: 13px !important;
+    margin-bottom: 16px !important;
+}
+
+.scale-sm #total-referrals img {
+    width: 16px !important;
+    height: 16px !important;
+}
+
+.scale-sm #total-referrals .total-referals {
+    font-size: 13px !important;
+}
+
+.scale-sm #referrals-list .title {
+    font-size: 15px !important;
+}
+
+.scale-sm #invite-friend img {
+    width: 16px;
+    height: 16px;
+}
+
+.scale-sm #invite-friend p {
+    font-size: 15px !important;
+}
+
+.scale-sm .card .username {
+    font-size: 13px !important;
+}
+
+.scale-sm .card .delay {
+    font-size: 11px !important;
+}
+
+.scale-sm .card .username .point-number{
+    font-size: 24px !important;
+}
+
+.scale-sm .card .username .point-number{
+    font-size: 13px !important;
+}

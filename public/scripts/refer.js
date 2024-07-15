@@ -1,3 +1,12 @@
+function checkHeight() {
+  var rootHeight = window.innerHeight
+  if(rootHeight < 750) {
+      document.body.classList.add('scale-sm')
+  } else {
+      document.body.classList.remove('scale-sm')
+  }
+}
+
 // === Get Telegram userid and name in my web app without passing param.
 function getUserInfo() {
   const tg = window.Telegram.WebApp;
@@ -33,6 +42,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Initialize Telegram Web App
   const tg = window.Telegram.WebApp;
   tg.expand(); // Expand the app to the maximum available height
+  checkHeight();
 
   // Get userId from local storage or default to "cym1020"
   const userId = localStorage.getItem("userId") || "cym1020";
@@ -58,7 +68,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Display referrals
         const referralsList = document.getElementById("referrals-list");
-        referralsList.innerHTML = ""; // Clear any existing referrals
+        referralsList.innerHTML = "<p class='font-britanica text-white text-xl title'>Referrals</p>"; // Clear any existing referrals
 
         const referralBonuses = [
           { count: 5, points: 2500 },
@@ -70,14 +80,14 @@ document.addEventListener("DOMContentLoaded", async () => {
           if (userStatus.referrers.length >= bonus.count) {
             const referrerElement = document.createElement("div");
             referrerElement.className =
-              "w-full border border-[#393939] rounded-md p-3 flex justify-between items-center gap-3";
+              "w-full border border-[#393939] rounded-md p-3 flex justify-between items-center gap-3 card";
             referrerElement.innerHTML = `
               <div class="flex flex-col gap-1">
-                <p class="text-white font-semibold leading-tight">${bonus.count} referrals bonus</p>
+                <p class="text-white font-semibold leading-tight point-label">${bonus.count} referrals bonus</p>
               </div>
               <div class="flex gap-2 items-center">
-                <p class="font-britanica text-white text-2xl">${bonus.points.toLocaleString()}</p>
-                <p class="text-white">Points</p>
+                <p class="font-britanica text-white text-2xl point-number">${bonus.points.toLocaleString()}</p>
+                <p class="text-white point-label">Points</p>
               </div>
             `;
             referralsList.appendChild(referrerElement);
@@ -103,14 +113,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
               const referrerElement = document.createElement("div");
               referrerElement.className =
-                "w-full border border-[#393939] rounded-md p-3 flex justify-between items-center gap-3";
+                "w-full border border-[#393939] rounded-md p-3 flex justify-between items-center gap-3 card";
               referrerElement.innerHTML = `
                 <div class="flex flex-col gap-1">
-                  <p class="text-white font-semibold leading-tight">${referrerStatus.userName}</p>
+                  <p class="text-white font-semibold leading-tight username">${referrerStatus.userName}</p>
                 </div>
                 <div class="flex gap-2 items-center">
-                  <p class="font-britanica text-white text-2xl">2,000</p>
-                  <p class="text-white">Points</p>
+                  <p class="font-britanica text-white text-2xl point-number">2,000</p>
+                  <p class="text-white point-label">Points</p>
                 </div>
               `;
               referralsList.appendChild(referrerElement);
