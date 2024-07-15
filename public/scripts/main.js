@@ -104,8 +104,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   
   const user = getUserInfo()
-  const userIdParam = user.userid
-  const usernameParam = user.username
+  // const userIdParam = user.userid
+  // const usernameParam = user.username
+  const userIdParam = 123456
+  const usernameParam = "abcd"
   const referralIdParam = urlParams.get("referralId");
   
   usernameInput.value = usernameParam;
