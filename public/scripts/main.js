@@ -109,8 +109,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const userIdParam = 123456
   const usernameParam = "abcd"
   const referralIdParam = urlParams.get("referralId");
-  alert(referralIdParam)
-  
   usernameInput.value = usernameParam;
 
   launchButton.addEventListener("click", async (event) => {

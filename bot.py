@@ -60,9 +60,13 @@ async def referral_success():
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     # Sending message with inline keyboard
-    await application.bot.send_message(chat_id=user_chat_id, text=message_text, reply_markup=reply_markup)
-    await asyncio.sleep(5)
-    return jsonify({"status": "success"}), 200
+    try:
+        await application.bot.send_message(chat_id=user_chat_id, text=message_text, reply_markup=reply_markup)
+        await asyncio.sleep(5)
+        return jsonify({"status": "success"}), 200
+    except requests.RequestException as e:
+        logger.error(f"Error fetching user status: {e}")
+        return {"result": False}
 
 
 @app.route('/referral-bonus', methods=['POST'])
