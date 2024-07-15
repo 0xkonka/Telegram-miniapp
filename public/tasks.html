@@ -6,63 +6,64 @@
   <title>Telegram Mini App</title>
   <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="dist/output.css" rel="stylesheet">
+  <link href="dist/task.css" rel="stylesheet">
 </head>
 <body class="app-bg flex items-center justify-center min-h-screen">
-    <div id="app" class="px-4 pt-12 pb-32  w-full min-h-screen h-full">
+    <div id="app" class="px-4 pt-12 w-full min-h-screen h-full app-root">
         <!-- Content Here -->
         <div id="content">
             <div id="title">
                 <div class="flex flex-col">
-                    <p class="text-3xl text-center text-white font-britanica mb-8">
+                    <h1 class="text-3xl text-center text-white font-britanica mb-8 tasks-title">
                         3 tasks available
-                    </p>
-                    <p class="max-w-xs text-center text-white font-light leading-tight mb-12 mx-auto">
+                    </h1>
+                    <p class="max-w-xs text-center text-white font-light leading-tight mb-12 mx-auto reward-description">
                         We’ll reward you immediately with points after each task completion.
                     </p>
                 </div>
             </div>
             <div id="social-tasks" class="flex flex-col gap-3">
-                <div class="w-full border border-[#393939] rounded-md p-3 flex items-center gap-3">
+                <div class="w-full border border-[#393939] rounded-md p-3 flex items-center gap-3 card">
                     <img src="./assets/svgs/telegram.svg" alt="Telegram" class="w-10 h-10"/>
                     <div class="flex flex-col gap-1">
                         <p class="text-white font-semibold leading-tight">Subscribe to Tren Telegram</p>
                         <p class="text-sm text-white font-light">+100 POINTS</p>
                     </div>
                     <div class="ml-auto">
-                        <a id="start-telegram" class="bg-[#181818] px-4 py-1 rounded-full text-white font-semibold" href="https://t.me/trenfinance" target="_blank">Start</a>
+                        <a id="start-telegram" class="bg-[#181818] px-4 py-1 rounded-full text-white font-semibold start-task" href="https://t.me/trenfinance" target="_blank">Start</a>
                     </div>
                 </div>
-                <div class="w-full border border-[#393939] rounded-md p-3 flex items-center gap-3">
+                <div class="w-full border border-[#393939] rounded-md p-3 flex items-center gap-3 card">
                     <img src="./assets/svgs/discord.svg" alt="Discord" class="w-10 h-10"/>
                     <div class="flex flex-col gap-1">
                         <p class="text-white font-semibold leading-tight">Join Tren's Discord</p>
                         <p class="text-sm text-white font-light">+100 POINTS</p>
                     </div>
                     <div class="ml-auto">
-                        <a id="start-discord" class="bg-[#181818] px-4 py-1 rounded-full text-white font-semibold" href="https://discord.com/invite/trenfinance" target="_blank">Start</a>
+                        <a id="start-discord" class="bg-[#181818] px-4 py-1 rounded-full text-white font-semibold start-task" href="https://discord.com/invite/trenfinance" target="_blank">Start</a>
                     </div>
                 </div>
-                <div class="w-full border border-[#393939] rounded-md p-3 flex items-center gap-3">
+                <div class="w-full border border-[#393939] rounded-md p-3 flex items-center gap-3 card">
                     <img src="./assets/svgs/twitter.svg" alt="Twitter" class="w-10 h-10"/>
                     <div class="flex flex-col gap-1">
                         <p class="text-white font-semibold leading-tight">Follow @TrenFinance on X</p>
                         <p class="text-sm text-white font-light">+100 POINTS</p>
                     </div>
                     <div class="ml-auto">
-                        <a id="start-twitter" class="bg-[#181818] px-4 py-1 rounded-full text-white font-semibold" href="https://twitter.com/TrenFinance" target="_blank">Start</a>
+                        <a id="start-twitter" class="bg-[#181818] px-4 py-1 rounded-full text-white font-semibold start-task" href="https://twitter.com/TrenFinance" target="_blank">Start</a>
                     </div>
                 </div>
             </div>
 
-            <div id="task-progression" class="mt-16">
+            <div id="task-progression" class="task-progression mt-32">
                 <div class="w-full rounded-full bg-[#1C1C1C] h-2 relative">
                     <svg id="progress-comment" class="absolute top-[-50px]" xmlns="http://www.w3.org/2000/svg" width="40" height="34" viewBox="0 0 57 34" fill="none"
                         style="left:calc(0% - 25px)">
                         <path d="M34.2966 27.0942H33.7575L33.798 27.6318L34.1837 32.7468L28.9393 27.7792C28.475 27.3393 27.8597 27.0942 27.2201 27.0942H2C1.17157 27.0942 0.5 26.4226 0.5 25.5942V2C0.5 1.17157 1.17157 0.5 2 0.5H55C55.8284 0.5 56.5 1.17157 56.5 2V25.5942C56.5 26.4226 55.8284 27.0942 55 27.0942H34.2966Z" fill="#67DAB1" fill-opacity="0.2" stroke="#67DAB1"/>
                     </svg>
-                    <p id="progress-label" class="absolute text-sm font-semibold text-primary top-[-46px]"
+                    <p id="progress-label" class="absolute text-sm font-semibold text-primary top-[-46px] percent-label"
                         style="left:calc(0% - 20px)">
-                        30%
+                        0%
                     </p>
                     <div id="progress" class="rounded-full bg-[#67DAB1] h-full" style="width:0px"></div>
                     <svg id="progress-indicator" class="absolute top-1/2 -translate-y-1/2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -80,7 +81,7 @@
 
         </div>
         <!-- Footer -->
-        <div class="fixed w-full left-0 bottom-0 py-4 flex justify-around bg-[#080A0A] z-20">
+        <div class="footer fixed w-full left-0 bottom-0 py-4 flex justify-around z-20">
             <a class="flex flex-col items-center" href="./farm.html">
                 <img src="./assets/svgs/home.svg" alt="Farm" class="w-7 h-7"/>
                 <p class="text-white">Farm</p>

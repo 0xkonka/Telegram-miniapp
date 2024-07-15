@@ -1,3 +1,8 @@
+.disabled {
+    background-color: grey !important;
+    cursor: not-allowed;
+}
+
 .scale-sm .app-root {
     padding-top: 28px !important;
 }

@@ -1,5 +1,15 @@
+function checkHeight() {
+  var rootHeight = window.innerHeight
+  if(rootHeight < 750) {
+      document.body.classList.add('scale-sm')
+  } else {
+      document.body.classList.remove('scale-sm')
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("Tasks JS code here");
+  checkHeight()
 
   const BE_URL = window.config.BE_URL;
   const TG_TOKEN = window.config.TG_TOKEN;
