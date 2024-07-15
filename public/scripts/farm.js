@@ -49,7 +49,6 @@ function checkHeight() {
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("Farm JS code here");
 
-  checkHeight()
   // === Open the TG App in big screen === //
   Telegram.WebApp.onEvent("init", function () {
     Telegram.WebApp.setHeaderColor("bg_color", "#101010");
@@ -65,6 +64,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
   // Immediately attempt to expand
   Telegram.WebApp.expand();
+  checkHeight()
+
   // ==================================== //
   // == If user navigated farm page directly (already registered user) == //
   const user = getUserInfo();
