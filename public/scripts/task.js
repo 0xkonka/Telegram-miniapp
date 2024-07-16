@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         if(completedTasks != 0) {
           document.getElementById("progress").style.width = `${(completedTasks / 3) * 100}%`;
-          document.getElementById("progress-labe").classList.remove('hidden');
+          document.getElementById("progress-label").classList.remove('hidden');
           document.getElementById("progress-label").style.left = `calc(${(completedTasks / 3) * 100}% - 20px)`;
           document.getElementById("progress-comment").classList.remove('hidden');
           document.getElementById("progress-comment").style.left = `calc(${(completedTasks / 3) * 100}% - 25px)`;
