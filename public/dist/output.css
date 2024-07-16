@@ -977,10 +977,6 @@ video {
   padding-top: 1rem;
 }
 
-.pb-44 {
-  padding-bottom: 11rem;
-}
-
 .text-center {
   text-align: center;
 }
@@ -1074,6 +1070,11 @@ video {
 
 body {
   font-family: 'Work Sans', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 2px;
 }
 
 @font-face {
