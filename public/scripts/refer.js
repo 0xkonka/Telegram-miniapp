@@ -42,9 +42,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   const TG_TOKEN = window.config.TG_TOKEN;
 
   // Initialize Telegram Web App
-  const tg = window.Telegram.WebApp;
-  tg.expand(); // Expand the app to the maximum available height
-  checkHeight();
+  // const tg = window.Telegram.WebApp;
+  // tg.expand(); // Expand the app to the maximum available height
+  // checkHeight();
+  Telegram.WebApp.setHeaderColor("#101010");
+  Telegram.WebApp.setBackgroundColor("#101010");
+  Telegram.WebApp.expand();
 
   // Get userId from local storage or default to "cym1020"
   const userId = localStorage.getItem("userId") || "cym1020";

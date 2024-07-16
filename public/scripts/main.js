@@ -80,22 +80,25 @@ async function referralBonus(referenceId, message) {
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("JS code here", BE_URL);
-
-  // === Open the TG App in big screen === //
-  Telegram.WebApp.onEvent('init', function(){
-    Telegram.WebApp.setHeaderColor('bg_color', '#101010');
-  });
-  // Initialize the Telegram Mini App
-  Telegram.WebApp.ready();
-
-  Telegram.WebApp.onEvent('viewportChanged', function(height){
-      if (height == window.innerHeight) {
-          return;
-      }
-      Telegram.WebApp.expand();
-  });
-  // Immediately attempt to expand
+  Telegram.WebApp.setHeaderColor("#101010");
+  Telegram.WebApp.setBackgroundColor("#101010");
   Telegram.WebApp.expand();
+  
+  // === Open the TG App in big screen === //
+  // Telegram.WebApp.onEvent('init', function(){
+  //   Telegram.WebApp.setHeaderColor('bg_color', '#101010');
+  // });
+  // // Initialize the Telegram Mini App
+  // Telegram.WebApp.ready();
+
+  // Telegram.WebApp.onEvent('viewportChanged', function(height){
+  //     if (height == window.innerHeight) {
+  //         return;
+  //     }
+  //     Telegram.WebApp.expand();
+  // });
+  // // Immediately attempt to expand
+  // Telegram.WebApp.expand();
 
   // ==== Register User === //
   const launchButton = document.getElementById("launch-app");

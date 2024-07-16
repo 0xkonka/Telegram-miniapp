@@ -51,16 +51,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   Telegram.WebApp.setHeaderColor("#101010");
   Telegram.WebApp.setBackgroundColor("#101010");
-  
-
-  Telegram.WebApp.onEvent("viewportChanged", function (height) {
-    if (height == window.innerHeight) {
-      return;
-    }
-    Telegram.WebApp.expand();
-  });
-  // Immediately attempt to expand
   Telegram.WebApp.expand();
+
+  // Telegram.WebApp.onEvent("viewportChanged", function (height) {
+  //   if (height == window.innerHeight) {
+  //     return;
+  //   }
+  //   Telegram.WebApp.expand();
+  // });
+  // Immediately attempt to expand
+  // Telegram.WebApp.expand();
   checkHeight()
 
   // ==================================== //

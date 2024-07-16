@@ -11,6 +11,9 @@ function checkHeight() {
 
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("Tasks JS code here");
+  Telegram.WebApp.setHeaderColor("#101010");
+  Telegram.WebApp.setBackgroundColor("#101010");
+  Telegram.WebApp.expand();
   checkHeight()
 
   const BE_URL = window.config.BE_URL;
