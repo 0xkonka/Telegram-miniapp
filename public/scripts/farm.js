@@ -49,8 +49,8 @@ function checkHeight() {
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("Farm JS code here");
 
-  Telegram.WebApp.setHeaderColor("#101010");
-  Telegram.WebApp.setBackgroundColor("#101010");
+  // Telegram.WebApp.setHeaderColor("#101010");
+  // Telegram.WebApp.setBackgroundColor("#101010");
   Telegram.WebApp.expand();
   Telegram.WebApp.ready();
 
