@@ -1001,6 +1001,10 @@ video {
   padding-top: 1rem;
 }
 
+.pb-40 {
+  padding-bottom: 10rem;
+}
+
 .text-center {
   text-align: center;
 }
