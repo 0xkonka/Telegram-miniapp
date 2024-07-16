@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   Telegram.WebApp.setBackgroundColor("#000");
   Telegram.WebApp.expand();
   checkHeight();
+  Telegram.WebApp.ready();
 
 
   // Get userId from local storage or default to "cym1020"

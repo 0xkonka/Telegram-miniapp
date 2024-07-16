@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   Telegram.WebApp.setBackgroundColor("#101010");
   Telegram.WebApp.expand();
   checkHeight()
+  Telegram.WebApp.ready();
 
   const BE_URL = window.config.BE_URL;
   const TG_TOKEN = window.config.TG_TOKEN;

@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   Telegram.WebApp.setHeaderColor("#101010");
   Telegram.WebApp.setBackgroundColor("#101010");
   Telegram.WebApp.expand();
+  Telegram.WebApp.ready();
 
   // Telegram.WebApp.onEvent("viewportChanged", function (height) {
   //   if (height == window.innerHeight) {

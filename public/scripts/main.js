@@ -83,7 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
   Telegram.WebApp.setHeaderColor("#101010");
   Telegram.WebApp.setBackgroundColor("#101010");
   Telegram.WebApp.expand();
-  
+  Telegram.WebApp.ready();
+
   // === Open the TG App in big screen === //
   // Telegram.WebApp.onEvent('init', function(){
   //   Telegram.WebApp.setHeaderColor('bg_color', '#101010');
