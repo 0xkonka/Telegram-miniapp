@@ -48,15 +48,10 @@ function checkHeight() {
 
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("Farm JS code here");
-  Telegram.WebApp.setHeaderColor("#101010");
 
-  // === Open the TG App in big screen === //
-  Telegram.WebApp.onEvent("init", function () {
-    alert('abc');
-    Telegram.WebApp.setHeaderColor("#101010");
-  });
-  // // Initialize the Telegram Mini App
-  // Telegram.WebApp.ready();
+  Telegram.WebApp.setHeaderColor("#101010");
+  Telegram.WebApp.setBackgroundColor("#101010");
+  
 
   Telegram.WebApp.onEvent("viewportChanged", function (height) {
     if (height == window.innerHeight) {
