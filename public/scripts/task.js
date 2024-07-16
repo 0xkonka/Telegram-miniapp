@@ -56,16 +56,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Update task progression
         const completedTasks = ["telegram", "discord", "twitter"].filter(social => userStatus.socialTaskStatus[social]).length;
         document.getElementById("task-count").textContent = `${completedTasks}/3`;
-        document.getElementById("progress").style.width = `${(completedTasks / 3) * 100}%`;
-        document.getElementById("progress-label").style.left = `calc(${(completedTasks / 3) * 100}% - 20px)`;
-        document.getElementById("progress-comment").style.left = `calc(${(completedTasks / 3) * 100}% - 25px)`;
-        document.getElementById("progress-indicator").style.left = `calc(${(completedTasks / 3) * 100}% - 15px)`;
 
-        // Hide bubble, label, indicator when the completed task count is 0.
-        document.getElementById("progress-comment").style.display = completedTasks == 0 ? 'none' : 'block';  
-        document.getElementById("progress-label").style.display = completedTasks == 0 ? 'none' : 'block';  
-        document.getElementById("progress-indicator").style.display = completedTasks == 0 ? 'none' : 'block';          
-        document.getElementById("progress-label").innerHTML = `${parseInt((completedTasks / 3) * 100)}%`;
+        if(completedTasks != 0) {
+          document.getElementById("progress").style.width = `${(completedTasks / 3) * 100}%`;
+          document.getElementById("progress-labe").classList.remove('hidden');
+          document.getElementById("progress-label").style.left = `calc(${(completedTasks / 3) * 100}% - 20px)`;
+          document.getElementById("progress-comment").classList.remove('hidden');
+          document.getElementById("progress-comment").style.left = `calc(${(completedTasks / 3) * 100}% - 25px)`;
+          document.getElementById("progress-indicator").classList.remove('hidden');
+          document.getElementById("progress-indicator").style.left = `calc(${(completedTasks / 3) * 100}% - 15px)`;
+  
+          // Hide bubble, label, indicator when the completed task count is 0.
+          // document.getElementById("progress-comment").style.display = completedTasks == 0 ? 'none' : 'block';
+          // document.getElementById("progress-label").style.display = completedTasks == 0 ? 'none' : 'block';
+          // document.getElementById("progress-indicator").style.display = completedTasks == 0 ? 'none' : 'block';
+          document.getElementById("progress-label").innerHTML = `${parseInt((completedTasks / 3) * 100)}%`;
+        }
       } else {
         console.error(
           "Error getting user status:",
