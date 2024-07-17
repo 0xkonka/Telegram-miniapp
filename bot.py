@@ -1,22 +1,17 @@
-import logging
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, CallbackContext, ContextTypes
 import os
 from dotenv import load_dotenv
 import requests
 from flask import Flask, request, jsonify
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 import asyncio
+import nest_asyncio
+nest_asyncio.apply()
 
 app = Flask(__name__)
 # CORS(app, resources={r"/*": {"origins": "https://telegram-mini-app-kappa.vercel.app"}})
 CORS(app)
-
-# Enable logging
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
-)
-logger = logging.getLogger(__name__)
 
 # Load environment variables
 load_dotenv()
@@ -37,10 +32,9 @@ def fetch_user_status(user_id):
     response = requests.get(url, headers=headers)
     return response.json()
 
-
-@app.route('/get-test', methods=['GET'])
-def getTest():
-    return "abcde"
+# @app.route('/get-test', methods=['GET'])
+# def getTest():
+#     return "abcde"
 
 @app.route('/referral-success', methods=['POST'])
 async def referral_success():
@@ -50,57 +44,45 @@ async def referral_success():
         return jsonify({"status": "fail"}), 400
     
     user_chat_id = reference_id
+
+    # Sending Referral Success 2000 point bonus notification
     message_text = "You’ve earned 2,000 points through a successful referral.\n\nYour friend has also received 2,000 points. Keep up the good work!"
-
-    # Constructing the inline keyboard markup
-    TASK_WEB_APP_URL_REFER = 'https://telegram-mini-app-kappa.vercel.app/refer.html'
-    keyboard = [
-        [InlineKeyboardButton("→ Refer more friends", web_app=WebAppInfo(url=TASK_WEB_APP_URL_REFER))],
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-
-    # Sending message with inline keyboard
-    try:
-        await application.bot.send_message(chat_id=user_chat_id, text=message_text, reply_markup=reply_markup)
-        await asyncio.sleep(5)
-        return jsonify({"status": "success"}), 200
-    except Exception as e:
-        logger.error(f"Error fetching user status: {e}")
-        return jsonify({"status": "success"}), 500
-
-
-@app.route('/referral-bonus', methods=['POST'])
-async def referral_bonus():
-    data = request.get_json()
-    reference_id = data.get("reference_id", 0)
-    message = data.get("message", "Congrats Bonus")
-    if reference_id == 0:
-        return jsonify({"status": "fail"}), 400
     
-    user_chat_id = reference_id
-    message_text = message
-
-    # Constructing the inline keyboard markup
     TASK_WEB_APP_URL_REFER = 'https://telegram-mini-app-kappa.vercel.app/refer.html'
     keyboard = [
         [InlineKeyboardButton("→ Refer more friends", web_app=WebAppInfo(url=TASK_WEB_APP_URL_REFER))],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-
-    # Sending message with inline keyboard
     await application.bot.send_message(chat_id=user_chat_id, text=message_text, reply_markup=reply_markup)
-    await asyncio.sleep(5)
-    return jsonify({"status": "success"}), 200
+    # await asyncio.sleep(2)
+
+    #  Sending referral bonus for 5, 10, 25 friends
+    bounsPoints = 0
+    status_response = fetch_user_status(reference_id)
+    referral_count = len(status_response['data']['referrers'])
+    if referral_count == 5:
+        bounsPoints = 2500
+    elif referral_count == 10:
+        bounsPoints = 5000
+    elif referral_count == 25:
+        bounsPoints = 12500
+
+    if bounsPoints != 0:
+        bonus_message = f"You’ve got a {bounsPoints:,} points bonus by successfully referring {referral_count} people. Keep up the good work!"
+        await application.bot.send_message(chat_id=user_chat_id, text=bonus_message, reply_markup=reply_markup)
+        # await asyncio.sleep(5)
+
+    return jsonify({"status": "You have succesfully received bonus"}), 200
 
 
 @app.route('/completed-farming', methods=['POST'])
 async def completedFarming():
-    message_text = "Congrats!\n\nYou’ve earned 200 points by farming. Head to the app to claim."
+    message_text = "Congrats!\n\nYou’ve earned 200 points by farming. Head over to the app to start farming again."
 
     # Constructing the inline keyboard markup
     TASK_WEB_APP_URL_FARM = 'https://telegram-mini-app-kappa.vercel.app/farm.html'
     keyboard = [
-        [InlineKeyboardButton("→ Claim tokens", web_app=WebAppInfo(url=TASK_WEB_APP_URL_FARM))],
+        [InlineKeyboardButton("→ Start Farming", web_app=WebAppInfo(url=TASK_WEB_APP_URL_FARM))],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
