@@ -27,7 +27,7 @@ gUserId = 0
 def fetch_user_status(user_id):
     url = f'https://be-express-lime.vercel.app/api/telegram/status/{user_id}'
     headers = {
-        'Authorization': f'Bearer {TG_API_BEARER_TOKEN}',
+        # 'Authorization': f'Bearer {TG_API_BEARER_TOKEN}',
     }
     response = requests.get(url, headers=headers)
     return response.json()
