@@ -72,8 +72,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // ==================================== //
 
   const BE_URL = window.config.BE_URL;
-  const TG_TOKEN = window.config.TG_TOKEN;
-
+  
   // Get userId from local storage
   const userId = localStorage.getItem("userId");
 
@@ -86,7 +85,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const userStatusResponse = await fetch(`${BE_URL}/status/${userId}`, {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${TG_TOKEN}`,
+          
         },
       });
 
@@ -213,7 +212,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${TG_TOKEN}`,
+            
           },
           body: JSON.stringify({ userId }),
         });

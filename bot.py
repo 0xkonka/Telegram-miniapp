@@ -10,7 +10,7 @@ import nest_asyncio
 nest_asyncio.apply()
 
 app = Flask(__name__)
-# CORS(app, resources={r"/*": {"origins": "https://telegram-mini-app-kappa.vercel.app"}})
+# CORS(app, resources={r"/*": {"origins": "https://miniapp.tren.finance"}})
 CORS(app)
 
 # Load environment variables
@@ -48,7 +48,7 @@ async def referral_success():
     # Sending Referral Success 2000 point bonus notification
     message_text = "You’ve earned 2,000 points through a successful referral.\n\nYour friend has also received 2,000 points. Keep up the good work!"
     
-    TASK_WEB_APP_URL_REFER = 'https://telegram-mini-app-kappa.vercel.app/refer.html'
+    TASK_WEB_APP_URL_REFER = 'https://miniapp.tren.finance/refer.html'
     keyboard = [
         [InlineKeyboardButton("→ Refer more friends", web_app=WebAppInfo(url=TASK_WEB_APP_URL_REFER))],
     ]
@@ -80,7 +80,7 @@ async def completedFarming():
     message_text = "Congrats!\n\nYou’ve earned 200 points by farming. Head over to the app to start farming again."
 
     # Constructing the inline keyboard markup
-    TASK_WEB_APP_URL_FARM = 'https://telegram-mini-app-kappa.vercel.app/farm.html'
+    TASK_WEB_APP_URL_FARM = 'https://miniapp.tren.finance/farm.html'
     keyboard = [
         [InlineKeyboardButton("→ Start Farming", web_app=WebAppInfo(url=TASK_WEB_APP_URL_FARM))],
     ]
@@ -119,9 +119,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # Call the external API to get user status
     status_response = fetch_user_status(user.id)
     if status_response['result']:
-        TASK_WEB_APP_URL_EXTENDED = f'https://telegram-mini-app-kappa.vercel.app/farm.html?referralId={referralId}'
+        TASK_WEB_APP_URL_EXTENDED = f'https://miniapp.tren.finance/farm.html?referralId={referralId}'
     else:
-        TASK_WEB_APP_URL_EXTENDED = f'https://telegram-mini-app-kappa.vercel.app/?referralId={referralId}'
+        TASK_WEB_APP_URL_EXTENDED = f'https://miniapp.tren.finance/?referralId={referralId}'
 
     # Description and banner (placeholder)
     description = f"Welcome to Tren Finance!\n\nStart farming points as an early adopter.\n\nFor every friend you refer, you both get 2,000 bonus points.\n\nHit the button below to start the app."

@@ -1,6 +1,6 @@
 // Configure
 const BE_URL = window.config.BE_URL;
-const TG_TOKEN = window.config.TG_TOKEN;
+
 
 // === Get Telegram userid and name in my web app without passing param.
 function getUserInfo () {
@@ -29,7 +29,7 @@ async function registerUser(userId, userName, referrerId) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${TG_TOKEN}`,
+        
       },
       body: JSON.stringify({ userId, userName, referrerId }),
     });
