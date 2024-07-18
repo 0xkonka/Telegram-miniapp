@@ -21,8 +21,6 @@ TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 TG_API_BEARER_TOKEN = os.getenv('TG_API_BEARER_TOKEN')
 # Ceate bot instance
 application = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
-# Global User Id
-gUserId = 0
 
 def fetch_user_status(user_id):
     url = f'https://be-express-lime.vercel.app/api/telegram/status/{user_id}'
@@ -77,6 +75,11 @@ async def referral_success():
 
 @app.route('/completed-farming', methods=['POST'])
 async def completedFarming():
+    data = request.get_json()
+    user_id = data.get("user_id", 0)
+    if user_id == 0:
+        return jsonify({"status": "fail"}), 400
+
     message_text = "Congrats!\n\nYou’ve earned 200 points by farming. Head over to the app to start farming again."
 
     # Constructing the inline keyboard markup
@@ -87,8 +90,8 @@ async def completedFarming():
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     # Sending message with inline keyboard
-    global gUserId
-    await application.bot.send_message(chat_id=gUserId , text=message_text, reply_markup=reply_markup)
+    
+    await application.bot.send_message(chat_id=user_id , text=message_text, reply_markup=reply_markup)
     await asyncio.sleep(5)
     return jsonify({"status": "success"}), 200
 
@@ -112,8 +115,6 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if args:
         referralId = args[0]
     user = update.message.from_user
-    global gUserId
-    gUserId = user.id
     """Send a message when the command /start is issued."""
     
     # Call the external API to get user status
