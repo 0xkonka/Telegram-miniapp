@@ -21,9 +21,9 @@ function getUserInfo() {
 }
 
 // Completed Farming to send notification
-function completedFarming() {
+async function completedFarming() {
   const data = {};
-  fetch('https://telegram.tren.finance/completed-farming', {
+  await fetch('https://telegram.tren.finance/completed-farming', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
@@ -54,14 +54,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   Telegram.WebApp.expand();
   Telegram.WebApp.ready();
 
-  // Telegram.WebApp.onEvent("viewportChanged", function (height) {
-  //   if (height == window.innerHeight) {
-  //     return;
-  //   }
-  //   Telegram.WebApp.expand();
-  // });
-  // Immediately attempt to expand
-  // Telegram.WebApp.expand();
   checkHeight()
 
   // ==================================== //
@@ -112,6 +104,10 @@ document.addEventListener("DOMContentLoaded", async () => {
           document.getElementById("remaining-time").textContent =
             "0h : 0m : 0s";
         }
+
+        // Display tasks badge content
+        const completedTasks = ["telegram", "discord", "twitter"].filter(social => userStatus.socialTaskStatus[social]).length;
+        document.getElementById("tasks-badge").innerHTML = 3 - completedTasks;
 
         // Start interval to update points and time every second
         setInterval(() => {
@@ -174,6 +170,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById(
         "remaining-time"
       ).textContent = `${hours}h : ${minutes}m : ${seconds}s`;
+      // document.getElementById(
+      //   "remaining-seconds"
+      // ).textContent = remainingTime;
       disableFarmingButton();
     } else if(remainingTime == 0) {
       completedFarming();
