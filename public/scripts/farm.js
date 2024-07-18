@@ -174,6 +174,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById(
         "remaining-time"
       ).textContent = `${hours}h : ${minutes}m : ${seconds}s`;
+      document.getElementById(
+        "remaining-seconds"
+      ).textContent = remainingTime;
       disableFarmingButton();
     } else if(remainingTime == 0) {
       completedFarming();
