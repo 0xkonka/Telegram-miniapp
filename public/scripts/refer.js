@@ -70,6 +70,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         const userStatus = (await userStatusResponse.json()).data;
         console.log("User Status:", userStatus);
 
+        // Display tasks badge content
+        const completedTasks = ["telegram", "discord", "twitter"].filter(social => userStatus.socialTaskStatus[social]).length;
+        document.getElementById("tasks-badge").innerHTML = 3 - completedTasks;
+        
         // Display referral points
         document.getElementById("referral-points").textContent =
           userStatus.referralPoint.toLocaleString() || "0";
