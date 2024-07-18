@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           // document.getElementById("progress-indicator").style.display = completedTasks == 0 ? 'none' : 'block';
           document.getElementById("progress-label").innerHTML = `${parseInt((completedTasks / 3) * 100)}%`;
         }
-        
+
         document.getElementById("tasks-badge").innerHTML = 3 - completedTasks;
       } else {
         console.error(
@@ -134,6 +134,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             document.getElementById("progress-label").style.display = completedTasks == 0 ? 'none' : 'block';  
             document.getElementById("progress-indicator").style.display = completedTasks == 0 ? 'none' : 'block';          
             document.getElementById("progress-label").innerHTML = `${parseInt((completedTasks / 3) * 100)}%`;
+
+            document.getElementById("tasks-badge").innerHTML = 3 - completedTasks;
           }
         }, 10000)
       } else {
