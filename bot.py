@@ -25,16 +25,16 @@ application = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
 gUserId = 0
 
 def fetch_user_status(user_id):
-    url = f'https://be-express-lime.vercel.app/api/telegram/status/{user_id}'
+    url = f'https://api.tren.finance/api/telegram/status/{user_id}'
     headers = {
         # 'Authorization': f'Bearer {TG_API_BEARER_TOKEN}',
     }
     response = requests.get(url, headers=headers)
     return response.json()
 
-# @app.route('/get-test', methods=['GET'])
-# def getTest():
-#     return "abcde"
+@app.route('/test', methods=['GET'])
+def getTest():
+    return "ok"
 
 @app.route('/referral-success', methods=['POST'])
 async def referral_success():
