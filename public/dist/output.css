@@ -590,8 +590,8 @@ video {
   left: -16px;
 }
 
-.right-\[-4px\] {
-  right: -4px;
+.right-\[-2px\] {
+  right: -2px;
 }
 
 .top-1 {
@@ -604,6 +604,10 @@ video {
 
 .top-1\/2 {
   top: 50%;
+}
+
+.top-\[-10px\] {
+  top: -10px;
 }
 
 .top-\[-1px\] {
@@ -622,36 +626,12 @@ video {
   top: -46px;
 }
 
-.top-\[-4px\] {
-  top: -4px;
-}
-
 .top-\[-50px\] {
   top: -50px;
 }
 
 .top-\[14px\] {
   top: 14px;
-}
-
-.right-\[-12px\] {
-  right: -12px;
-}
-
-.top-\[-12px\] {
-  top: -12px;
-}
-
-.right-\[-20px\] {
-  right: -20px;
-}
-
-.top-\[-10px\] {
-  top: -10px;
-}
-
-.right-\[-2px\] {
-  right: -2px;
 }
 
 .z-20 {
@@ -678,11 +658,6 @@ video {
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
-}
-
-.my-auto {
-  margin-top: auto;
-  margin-bottom: auto;
 }
 
 .mb-12 {
@@ -785,20 +760,12 @@ video {
   height: 100vh;
 }
 
-.h-4 {
-  height: 1rem;
-}
-
 .min-h-screen {
   min-height: 100vh;
 }
 
 .w-10 {
   width: 2.5rem;
-}
-
-.w-2 {
-  width: 0.5rem;
 }
 
 .w-5 {
@@ -815,10 +782,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.w-4 {
-  width: 1rem;
 }
 
 .max-w-xs {
@@ -941,9 +904,9 @@ video {
   background-color: rgb(103 218 177 / var(--tw-bg-opacity));
 }
 
-.bg-\[\#F97171\] {
+.bg-\[\#F22\] {
   --tw-bg-opacity: 1;
-  background-color: rgb(249 113 113 / var(--tw-bg-opacity));
+  background-color: rgb(255 34 34 / var(--tw-bg-opacity));
 }
 
 .bg-black {
@@ -958,11 +921,6 @@ video {
 
 .bg-transparent {
   background-color: transparent;
-}
-
-.bg-\[\#F22\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 34 34 / var(--tw-bg-opacity));
 }
 
 .p-3 {
@@ -1071,6 +1029,10 @@ video {
   line-height: 1rem;
 }
 
+.font-bold {
+  font-weight: 700;
+}
+
 .font-light {
   font-weight: 300;
 }
@@ -1079,20 +1041,16 @@ video {
   font-weight: 600;
 }
 
-.font-bold {
-  font-weight: 700;
-}
-
 .uppercase {
   text-transform: uppercase;
 }
 
-.leading-tight {
-  line-height: 1.25;
-}
-
 .leading-\[20px\] {
   line-height: 20px;
+}
+
+.leading-tight {
+  line-height: 1.25;
 }
 
 .text-\[\#4D4D4D\] {
@@ -1169,4 +1127,12 @@ body {
 
 .footer {
   background: #000;
+}
+
+.scale-sm .badge {
+  top: -8px !important;
+  width: 16px !important;
+  height: 16px !important;
+  line-height: 16px !important;
+  font-size: 12px !important
 }

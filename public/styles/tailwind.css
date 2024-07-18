@@ -40,3 +40,11 @@ body {
 .footer {
     background: #000;
 }
+
+.scale-sm .badge {
+    top: -8px !important;
+    width: 16px !important;
+    height: 16px !important;
+    line-height: 16px !important;
+    font-size: 12px !important
+}
