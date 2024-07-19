@@ -156,7 +156,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   };
 
-  document.getElementById("start-telegram").addEventListener("click", () => handleTaskStart("telegram"));
+  document.getElementById("start-telegram").addEventListener("click", () => {
+    handleTaskStart("telegram")
+    const url = 'https://t.me/trenfinance'
+    window.open(url, '_blank')
+  });
   document.getElementById("start-discord").addEventListener("click", () => handleTaskStart("discord"));
   document.getElementById("start-twitter").addEventListener("click", () => handleTaskStart("twitter"));
 });
