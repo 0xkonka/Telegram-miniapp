@@ -109,6 +109,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
 
       if (response.ok) {
+        // If the task is Joining Telegram, we should redirect after db update.
+        if(social == 'telegram') {
+          const url = 'https://t.me/trenfinance'
+          window.open(url)  
+        }
+
         const result = await response.json();
         console.log(`${social} task started:`, result);
         // Update button and progression
@@ -158,8 +164,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   document.getElementById("start-telegram").addEventListener("click", () => {
     handleTaskStart("telegram")
-    const url = 'https://t.me/trenfinance'
-    window.open(url, '_blank')
+    
   });
   document.getElementById("start-discord").addEventListener("click", () => handleTaskStart("discord"));
   document.getElementById("start-twitter").addEventListener("click", () => handleTaskStart("twitter"));
