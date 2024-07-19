@@ -107,7 +107,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Display tasks badge content
         const completedTasks = ["telegram", "discord", "twitter"].filter(social => userStatus.socialTaskStatus[social]).length;
-        document.getElementById("tasks-badge").innerHTML = 3 - completedTasks;
+        if(completedTasks != 3) {
+          document.getElementById("tasks-badge").classList.remove('hidden')
+          document.getElementById("tasks-badge").innerHTML = 3 - completedTasks;          
+        } else {
+          document.getElementById("tasks-badge").classList.add('hidden')
+        }
 
         // Start interval to update points and time every second
         setInterval(() => {

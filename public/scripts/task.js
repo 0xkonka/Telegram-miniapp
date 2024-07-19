@@ -77,7 +77,12 @@ document.addEventListener("DOMContentLoaded", async () => {
           document.getElementById("progress-label").innerHTML = `${parseInt((completedTasks / 3) * 100)}%`;
         }
 
-        document.getElementById("tasks-badge").innerHTML = 3 - completedTasks;
+        if(completedTasks != 3) {
+          document.getElementById("tasks-badge").classList.remove('hidden')
+          document.getElementById("tasks-badge").innerHTML = 3 - completedTasks;          
+        } else {
+          document.getElementById("tasks-badge").classList.add('hidden')
+        }
       } else {
         console.error(
           "Error getting user status:",
@@ -135,7 +140,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             document.getElementById("progress-indicator").style.display = completedTasks == 0 ? 'none' : 'block';          
             document.getElementById("progress-label").innerHTML = `${parseInt((completedTasks / 3) * 100)}%`;
 
-            document.getElementById("tasks-badge").innerHTML = 3 - completedTasks;
+            if(completedTasks != 3) {
+              document.getElementById("tasks-badge").classList.remove('hidden')
+              document.getElementById("tasks-badge").innerHTML = 3 - completedTasks;          
+            } else {
+              document.getElementById("tasks-badge").classList.add('hidden')
+            }
           }
         }, 10000)
       } else {

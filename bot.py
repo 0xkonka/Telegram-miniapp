@@ -32,9 +32,11 @@ def fetch_user_status(user_id):
     response = requests.get(url, headers=headers)
     return response.json()
 
+
 @app.route('/test', methods=['GET'])
 def getTest():
     return "ok"
+
 
 @app.route('/referral-success', methods=['POST'])
 async def referral_success():
@@ -92,9 +94,6 @@ async def completedFarming():
     await asyncio.sleep(5)
     return jsonify({"status": "success"}), 200
 
-
-@app.route('/sendData', methods=['POST'])
-async def receive_data():
     data = request.get_json()
     # Process the received data here
     message_text = data.get("message", "Hey, You received test notification from TG Mini App")
