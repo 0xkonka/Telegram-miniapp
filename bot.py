@@ -94,16 +94,6 @@ async def completedFarming():
     await asyncio.sleep(5)
     return jsonify({"status": "success"}), 200
 
-    data = request.get_json()
-    # Process the received data here
-    message_text = data.get("message", "Hey, You received test notification from TG Mini App")
-
-    # Send the message asynchronously using the global application instance
-    user_chat_id = 5040516536  # Assuming user_id is the chat ID where we want to send the message
-    await application.bot.send_message(chat_id=user_chat_id, text=message_text)
-    return jsonify({"status": "success"}), 200
-
-    # return "success"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     args = context.args
