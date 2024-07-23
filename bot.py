@@ -21,8 +21,6 @@ TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 TG_API_BEARER_TOKEN = os.getenv('TG_API_BEARER_TOKEN')
 # Ceate bot instance
 application = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
-# Global User Id
-gUserId = 0
 
 def fetch_user_status(user_id):
     url = f'https://api.tren.finance/api/telegram/status/{user_id}'
@@ -30,6 +28,18 @@ def fetch_user_status(user_id):
         # 'Authorization': f'Bearer {TG_API_BEARER_TOKEN}',
     }
     response = requests.get(url, headers=headers)
+    return response.json()
+
+
+def user_started_bot(user_id):
+    url = f'https://api.tren.finance/api/telegram/user/create'
+    data = {
+        'userId': user_id
+    }
+    headers = {
+        'Authorization': f'Bearer {TG_API_BEARER_TOKEN}',
+    }
+    response = requests.post(url, headers=headers, json=data)
     return response.json()
 
 
@@ -77,34 +87,17 @@ async def referral_success():
     return jsonify({"status": "You have succesfully received bonus"}), 200
 
 
-@app.route('/completed-farming', methods=['POST'])
-async def completedFarming():
-    message_text = "Congrats!\n\nYou’ve earned 200 points by farming. Head over to the app to start farming again."
-
-    # Constructing the inline keyboard markup
-    TASK_WEB_APP_URL_FARM = 'https://miniapp.tren.finance/farm.html'
-    keyboard = [
-        [InlineKeyboardButton("→ Start Farming", web_app=WebAppInfo(url=TASK_WEB_APP_URL_FARM))],
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-
-    # Sending message with inline keyboard
-    global gUserId
-    await application.bot.send_message(chat_id=gUserId , text=message_text, reply_markup=reply_markup)
-    await asyncio.sleep(5)
-    return jsonify({"status": "success"}), 200
-
-
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     args = context.args
     referralId = ''
     if args:
         referralId = args[0]
     user = update.message.from_user
-    global gUserId
-    gUserId = user.id
     """Send a message when the command /start is issued."""
     
+    # Add new user when user click /start command.
+    user_started_bot(user.id)
+
     # Call the external API to get user status
     status_response = fetch_user_status(user.id)
     if status_response['result']:

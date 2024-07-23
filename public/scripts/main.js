@@ -23,15 +23,15 @@ function getUserInfo () {
   }
 }
 
-async function registerUser(userId, userName, referrerId) {
+async function registerUser(userId, userName) {
   try {
-    const response = await fetch(`${BE_URL}/user/create`, {
+    const response = await fetch(`${BE_URL}/user/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         
       },
-      body: JSON.stringify({ userId, userName, referrerId }),
+      body: JSON.stringify({ userId, userName }),
     });
 
     if (response.ok) {
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
       usernameInput.classList.add('border-[#F97171]')
       document.getElementById("login-fail").classList.remove('hidden')
     } else {
-      await registerUser(userId, usernameInput.value, referralIdParam);
+      await registerUser(userId, usernameInput.value);
       if(referralIdParam)
         await referralSuccess(referralIdParam)
 
