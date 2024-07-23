@@ -20,21 +20,6 @@ function getUserInfo() {
   }
 }
 
-// Completed Farming to send notification
-async function completedFarming() {
-  const data = {};
-  await fetch('https://telegram.tren.finance/completed-farming', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-  })
-  .then(response => response.json())
-  .then(data => console.log('Success:', data))
-  .catch((error) => console.error('Error:', error));
-}
-
 function checkHeight() {
   var rootHeight = window.innerHeight
   if(rootHeight < 750) {
@@ -175,12 +160,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById(
         "remaining-time"
       ).textContent = `${hours}h : ${minutes}m : ${seconds}s`;
-      // document.getElementById(
-      //   "remaining-seconds"
-      // ).textContent = remainingTime;
       disableFarmingButton();
-    } else if(remainingTime == 0) {
-      completedFarming();
     } else {
       document.getElementById("remaining-time").textContent = "0h : 0m : 0s";
       enableFarmingButton();
