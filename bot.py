@@ -31,10 +31,11 @@ def fetch_user_status(user_id):
     return response.json()
 
 
-def user_started_bot(user_id):
+def user_started_bot(user_id, referrerId):
     url = f'https://api.tren.finance/api/telegram/user/create'
     data = {
-        'userId': user_id
+        'userId': user_id,
+        'referrerId': referrerId
     }
     headers = {
         'Authorization': f'Bearer {TG_API_BEARER_TOKEN}',
@@ -96,7 +97,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /start is issued."""
     
     # Add new user when user click /start command.
-    user_started_bot(user.id)
+    print(referralId)
+    user_started_bot(user.id, referralId)
 
     # Call the external API to get user status
     status_response = fetch_user_status(user.id)

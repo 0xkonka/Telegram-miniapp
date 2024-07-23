@@ -75,6 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const user = getUserInfo()
   const userIdParam = user.userid
   const usernameParam = user.username
+  // const userIdParam = 5040516536
+  // const usernameParam = "smartguy0402"
   const referralIdParam = urlParams.get("referralId");
   
   usernameInput.value = usernameParam;
